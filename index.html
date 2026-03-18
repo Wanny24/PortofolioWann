@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mas Irwan — Ultra Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html { scroll-snap-type: y mandatory; }
+
+    section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    /* subtle bg blobs */
+    .blob { position:absolute; filter: blur(80px); opacity:.25; border-radius:50%; z-index:0 }
+
+    /* animations */
+    .fade-up { opacity:0; transform: translateY(80px); transition: all 1s cubic-bezier(0.22,1,0.36,1);} 
+    .fade-up.show { opacity:1; transform: translateY(0);} 
+
+    /* cursor glow */
+    .cursor-glow { position: fixed; width: 200px; height: 200px; background: radial-gradient(circle, rgba(34,211,238,0.25), transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
+
+    /* parallax tint */
+    .parallax { background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.25), transparent), radial-gradient(circle at 80% 80%, rgba(34,211,238,0.18), transparent); }
+
+    /* glass card */
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border:1px solid rgba(255,255,255,0.1);} 
+
+    /* card hover */
+    .card { transition: all .35s ease; }
+    .card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.55);} 
+
+    /* typing */
+    .typing::after { content: '|'; animation: blink 1s infinite; }
+    @keyframes blink {0%,100%{opacity:0}50%{opacity:1}}
+
+    /* nav active */
+    .active { color:#22d3ee }
+
+    /* timeline zigzag */
+    .timeline { position:relative }
+    .timeline::before { content:''; position:absolute; left:50%; top:0; width:2px; height:100%; background: rgba(255,255,255,.1);} 
+    .tl-item { position:relative }
+    .tl-dot { position:absolute; left:50%; transform: translateX(-50%); width:12px; height:12px; background:#22d3ee; border-radius:999px; box-shadow:0 0 15px rgba(34,211,238,.7);} 
+
+    /* modal */
+    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); backdrop-filter: blur(6px); }
+    .modal.show { display:flex }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white parallax">
+
+<div class="cursor-glow" id="cursor"></div>
+
+<!-- NAVBAR -->
+<header class="fixed w-full top-0 backdrop-blur z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <h1 class="font-bold text-xl">Mas Irwan</h1>
+    <div class="flex gap-6 text-sm" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section>
+  <div class="blob w-80 h-80 bg-cyan-500 -top-10 -left-10"></div>
+  <div class="blob w-80 h-80 bg-blue-500 -bottom-10 -right-10"></div>
+
+  <div class="text-center fade-up relative z-10">
+    <h1 class="text-6xl md:text-7xl font-extrabold mb-4">Welcome to my</h1>
+    <h1 class="text-6xl md:text-7xl font-extrabold text-cyan-400 typing" id="typing"></h1>
+    
+    <div class="flex justify-center gap-6 mt-6 text-2xl">
+      <a href="https://instagram.com" target="_blank" class="hover:text-pink-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4zm8.25 1.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="hover:text-blue-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.94 6.5A2.44 2.44 0 1 1 2.06 6.5 2.44 2.44 0 0 1 6.94 6.5zM2.4 8.98h4.9V22H2.4zM9.34 8.98h4.7v1.78h.07c.65-1.23 2.24-2.52 4.6-2.52 4.92 0 5.83 3.24 5.83 7.45V22h-4.9v-5.73c0-1.37-.02-3.13-1.91-3.13-1.91 0-2.2 1.49-2.2 3.03V22h-4.9z"/></svg>
+      </a>
+      <a href="https://github.com" target="_blank" class="hover:text-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.87 10.93c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.54-3.88-1.54-.52-1.3-1.27-1.65-1.27-1.65-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.74 2.68 1.24 3.34.95.1-.74.4-1.24.72-1.52-2.55-.29-5.23-1.27-5.23-5.64 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .97-.31 3.18 1.17a11.02 11.02 0 0 1 5.8 0c2.2-1.48 3.17-1.17 3.17-1.17.63 1.57.24 2.73.12 3.02.73.8 1.18 1.82 1.18 3.07 0 4.38-2.69 5.35-5.25 5.64.41.36.77 1.08.77 2.18v3.23c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+      </a>
+    </div>
+    <p class="mt-6 text-gray-400">Scroll to explore</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w-6xl grid md:grid-cols-2 gap-16 items-center">
+
+    <!-- LEFT CONTENT -->
+    <div class="fade-up">
+      <p class="text-cyan-400 text-sm mb-2 tracking-widest">ABOUT ME</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+        Hi, I'm <span class="text-cyan-400">Irwan Yuandri</span>
+      </h2>
+
+      <p class="text-gray-300 leading-relaxed mb-6">
+        Active student at Budi Luhur University majoring in informatics engineering. Very interested in digital marketing strategy and graphic design with 2+ years experience. Proven ability to drive sales and improve business outcomes.
+      </p>
+
+      <!-- HIGHLIGHT STATS -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="glass p-4 rounded-xl text-center">
+          <h3 class="text-2xl font-bold text-cyan-400">2+</h3>
+          <p class="text-xs text-gray-400">Years Experience</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <h3 class="text-2xl font-bold text-cyan-400">10+</h3>
+          <p class="text-xs text-gray-400">Projects</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <h3 class="text-2xl font-bold text-cyan-400">5+</h3>
+          <p class="text-xs text-gray-400">Clients</p>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="glass p-4 rounded-xl card">
+          <h4 class="font-semibold mb-2 text-cyan-400">Professional</h4>
+          <ul class="text-gray-400 space-y-1">
+            <li>• E-commerce</li>
+            <li>• Advertising</li>
+            <li>• Graphic Design</li>
+            <li>• Copywriting</li>
+          </ul>
+        </div>
+
+        <div class="glass p-4 rounded-xl card">
+          <h4 class="font-semibold mb-2 text-cyan-400">Soft Skills</h4>
+          <ul class="text-gray-400 space-y-1">
+            <li>• Creative</li>
+            <li>• Analytical</li>
+            <li>• Problem Solving</li>
+            <li>• Time Management</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="fade-up flex justify-center">
+      <div class="relative">
+
+        <!-- glow background -->
+        <div class="absolute -inset-4 bg-cyan-500 opacity-20 blur-2xl rounded-2xl"></div>
+
+        <!-- main card -->
+        <div class="glass p-6 rounded-2xl card relative">
+          <img src="https://i.pravatar.cc/300?img=12" class="rounded-xl w-64 h-80 object-cover" alt="profile">
+
+          <!-- floating badge -->
+          
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE --> () -->
+<!-- FIX spacing bug -->
+<div class="h-20"></div>
+
+<section id="experience">
+  <div class="max-w-5xl w-full timeline">
+    <h2 class="text-4xl font-bold mb-12 text-center fade-up">Work Experience</h2>
+
+    <div class="space-y-16">
+
+      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+        <div class="md:pr-12 md:text-right">
+          <h3 class="font-bold">PT. Galaxy Digital Niaga</h3>
+          <p class="text-gray-400 text-sm">Feb 2024 - Now</p>
+          <p class="text-gray-300 mt-2">Designer Grafis & Video Editor — content scheduling, video production, marketplace assets.</p>
+        </div>
+        <div class="glass p-6 rounded-xl card md:pl-12">Key impact: improved content consistency & engagement.</div>
+        <div class="tl-dot" style="top: 10px"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+        <div class="glass p-6 rounded-xl card md:pr-12">Managed paid ads & community interactions.</div>
+        <div class="md:pl-12">
+          <h3 class="font-bold">Wijaya Group</h3>
+          <p class="text-gray-400 text-sm">July 2023 - Feb 2024</p>
+          <p class="text-gray-300 mt-2">Social Media Marketing — campaigns, concepts, collaborations.</p>
+        </div>
+        <div class="tl-dot" style="top: 10px"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+        <div class="md:pr-12 md:text-right">
+          <h3 class="font-bold">Beanbagkit</h3>
+          <p class="text-gray-400 text-sm">May 2022 - June 2023</p>
+          <p class="text-gray-300 mt-2">Designer & E-commerce Staff — product visuals, listings, operations.</p>
+        </div>
+        <div class="glass p-6 rounded-xl card md:pl-12">Handled Shopee/Tokopedia/TikTok Shop operations.</div>
+        <div class="tl-dot" style="top: 10px"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TITLE -->
+<h2 class="text-4xl font-bold text-center mb-6">Projects</h2>
+
+<!-- TOGGLE BUTTON -->
+<div class="flex justify-center gap-4 mb-10">
+  <button onclick="showProject()" id="btnProject"
+    class="px-5 py-2 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">
+    Project
+  </button>
+
+  <div class="flex justify-center gap-4 mb-10 relative z-50"></div>
+
+  <button onclick="showCert()" id="btnCert"
+    class="px-5 py-2 rounded-full border border-white/20 hover:border-cyan-400 transition">
+    Certificate
+  </button>
+</div>
+
+
+<!-- PROJECT -->
+<div id="projectContent" class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+
+  <!-- IT PROJECT -->
+  <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg hover:shadow-2xl transition">
+
+    <img src="https://picsum.photos/800/600?tech"
+         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-5">
+      <div>
+        <p class="text-white text-lg font-semibold">IT Projects</p>
+        <p class="text-gray-300 text-sm">Web, Automation, Backend</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DESIGN PROJECT -->
+  <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg hover:shadow-2xl transition">
+
+    <img src="https://picsum.photos/800/600?design"
+         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-5">
+      <div>
+        <p class="text-white text-lg font-semibold">Design Projects</p>
+        <p class="text-gray-300 text-sm">UI/UX, Branding, Content</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CERTIFICATE -->
+<div id="certContent" class="hidden overflow-hidden max-w-5xl mx-auto">
+
+  <div class="flex gap-6 animate-slide">
+
+    <img src="https://picsum.photos/300/200?1"
+         class="rounded-xl border border-white/10 hover:scale-105 transition">
+
+    <img src="https://picsum.photos/300/200?2"
+         class="rounded-xl border border-white/10 hover:scale-105 transition">
+
+    <img src="https://picsum.photos/300/200?3"
+         class="rounded-xl border border-white/10 hover:scale-105 transition">
+
+    <img src="https://picsum.photos/300/200?4"
+         class="rounded-xl border border-white/10 hover:scale-105 transition">
+
+  </div>
+
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w-xl w-full fade-up">
+    <h2 class="text-4xl font-bold mb-6 text-center">Get in Touch</h2>
+    <form class="flex flex-col gap-4 glass p-6 rounded-xl">
+      <input type="text" placeholder="Nama" class="p-4 rounded bg-gray-800">
+      <input type="email" placeholder="Email" class="p-4 rounded bg-gray-800">
+      <textarea placeholder="Pesan" class="p-4 rounded bg-gray-800"></textarea>
+      <button class="bg-cyan-500 p-4 rounded-xl hover:scale-105 transition">Send</button>
+    </form>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="glass p-6 rounded-xl max-w-md w-full">
+    <h3 id="modalTitle" class="text-xl font-bold mb-2"></h3>
+    <p id="modalDesc" class="text-gray-300"></p>
+    <button onclick="closeModal()" class="mt-4 bg-cyan-500 px-4 py-2 rounded">Close</button>
+  </div>
+</div>
+
+<script>
+// fade
+const elements = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); });
+elements.forEach(el => observer.observe(el));
+
+// cursor glow
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; });
+
+// typing
+const text = 'Portfolio Website'; let i=0; function typing(){ if(i<text.length){ document.getElementById('typing').innerHTML += text.charAt(i); i++; setTimeout(typing,60);} } typing();
+
+// active nav
+const sections = document.querySelectorAll('section'); const navLinks = document.querySelectorAll('#navLinks a');
+window.addEventListener('scroll', () => { let current=''; sections.forEach(sec => { const top=window.scrollY; const offset=sec.offsetTop-200; const height=sec.offsetHeight; if(top>=offset && top<offset+height){ current=sec.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === '#'+current){ link.classList.add('active'); } }); });
+
+// modal
+function openModal(title, desc){ document.getElementById('modal').classList.add('show'); document.getElementById('modalTitle').innerText=title; document.getElementById('modalDesc').innerText=desc; }
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+</script>
+
+</body>
+</html>
