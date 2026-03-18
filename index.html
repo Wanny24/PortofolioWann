@@ -221,81 +221,81 @@
   </div>
 </section>
 
-<!-- TITLE -->
-<h2 class="text-4xl font-bold text-center mb-6">Projects</h2>
 
-<!-- TOGGLE BUTTON -->
-<div class="flex justify-center gap-4 mb-10">
-  <button onclick="showProject()" id="btnProject"
-    class="px-5 py-2 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">
-    Project
-  </button>
+<section id="project">
 
-  <div class="flex justify-center gap-4 mb-10 relative z-50"></div>
+  <div class="max-w-5xl mx-auto w-full">
 
-  <button onclick="showCert()" id="btnCert"
-    class="px-5 py-2 rounded-full border border-white/20 hover:border-cyan-400 transition">
-    Certificate
-  </button>
-</div>
+    <!-- TITLE -->
+    <h2 class="text-4xl font-bold text-center mb-6">Projects</h2>
 
+    <!-- TOGGLE BUTTON -->
+    <div class="flex justify-center gap-4 mb-10">
+      <button onclick="showProject()" id="btnProject"
+        class="px-5 py-2 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">
+        Project
+      </button>
 
-<!-- PROJECT -->
-<div id="projectContent" class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto px-4">
+      <button onclick="showCert()" id="btnCert"
+        class="px-5 py-2 rounded-full border border-white/20 hover:border-cyan-400 transition">
+        Certificate
+      </button>
+    </div>
 
-  <!-- IT PROJECT -->
-  <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg hover:shadow-2xl transition">
+    <!-- PROJECT -->
+    <div id="projectContent" class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
 
-    <img src="https://picsum.photos/800/600?tech"
-         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+      <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg">
 
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-5">
-      <div>
+      <!-- IMAGE -->
+      <img src="https://picsum.photos/800/600?tech"
+          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+
+      <!-- OVERLAY -->
+      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+      <!-- TEXT -->
+      <div class="absolute bottom-0 left-0 p-5 translate-y-10 opacity-0 
+                  group-hover:translate-y-0 group-hover:opacity-100 
+                  transition duration-500">
         <p class="text-white text-lg font-semibold">IT Projects</p>
         <p class="text-gray-300 text-sm">Web, Automation, Backend</p>
       </div>
+
     </div>
 
-  </div>
+          <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg">
 
-  <!-- DESIGN PROJECT -->
-  <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg hover:shadow-2xl transition">
+      <!-- IMAGE -->
+      <img src="https://picsum.photos/800/700?tech"
+          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
 
-    <img src="https://picsum.photos/800/600?design"
-         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+      <!-- OVERLAY -->
+      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-5">
-      <div>
-        <p class="text-white text-lg font-semibold">Design Projects</p>
-        <p class="text-gray-300 text-sm">UI/UX, Branding, Content</p>
+      <!-- TEXT -->
+      <div class="absolute bottom-0 left-0 p-5 translate-y-10 opacity-0 
+                  group-hover:translate-y-0 group-hover:opacity-100 
+                  transition duration-500">
+        <p class="text-white text-lg font-semibold">Design</p>
+        <p class="text-gray-300 text-sm">Design, Graphic, Illustration</p>
+      </div>
+
+    </div>  
+
+    <!-- CERT -->
+    <div id="certContent" class="hidden overflow-x-auto px-4">
+      <div class="flex gap-6 animate-slide">
+        <img src="https://picsum.photos/300/200?1" class="rounded-xl">
+        <img src="https://picsum.photos/300/200?2" class="rounded-xl">
+        <img src="https://picsum.photos/300/200?3" class="rounded-xl">
+        <img src="https://picsum.photos/300/200?4" class="rounded-xl">
       </div>
     </div>
 
   </div>
 
-</div>
-
-
-<!-- CERTIFICATE -->
-<div id="certContent" class="hidden overflow-hidden max-w-5xl mx-auto">
-
-  <div class="flex gap-6 animate-slide">
-
-    <img src="https://picsum.photos/300/200?1"
-         class="rounded-xl border border-white/10 hover:scale-105 transition">
-
-    <img src="https://picsum.photos/300/200?2"
-         class="rounded-xl border border-white/10 hover:scale-105 transition">
-
-    <img src="https://picsum.photos/300/200?3"
-         class="rounded-xl border border-white/10 hover:scale-105 transition">
-
-    <img src="https://picsum.photos/300/200?4"
-         class="rounded-xl border border-white/10 hover:scale-105 transition">
-
-  </div>
-
-</div>
+</section>
 
 <!-- CONTACT -->
 <section id="contact">
