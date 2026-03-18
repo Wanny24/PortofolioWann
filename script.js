@@ -20,6 +20,257 @@ function initLoader() {
     }, 1500);
 }
 
+// ===== FUTURISTIC LOADING SCREEN =====
+function initFuturisticLoader() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  const loadingProgress = document.getElementById('loadingProgress');
+  const loadingPercentage = document.getElementById('loadingPercentage');
+  const loadingStatus = document.getElementById('loadingStatus');
+  
+  // Status messages
+  const statusMessages = [
+    'INITIALIZING SYSTEM',
+    'ESTABLISHING CONNECTION',
+    'LOADING ASSETS',
+    'CALIBRATING INTERFACE',
+    'RENDERING GRAPHICS',
+    'SYNCING DATA',
+    'OPTIMIZING PERFORMANCE',
+    'LAUNCHING PORTFOLIO'
+  ];
+  
+  let progress = 0;
+  let messageIndex = 0;
+  
+  // Create particles
+  createLoadingParticles();
+  
+  // Create binary rain
+  createBinaryRain();
+  
+  // Simulate loading progress
+  const interval = setInterval(() => {
+    progress += Math.random() * 3 + 1;
+    
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      
+      // Change status message
+      loadingStatus.textContent = 'SYSTEM READY';
+      
+      // Hide loading screen after delay
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+      }, 1000);
+    }
+    
+    // Update progress bar
+    loadingProgress.style.width = progress + '%';
+    loadingPercentage.textContent = Math.floor(progress) + '%';
+    
+    // Update status message every 10-15%
+    if (progress > (messageIndex + 1) * 12.5) {
+      messageIndex++;
+      if (messageIndex < statusMessages.length) {
+        loadingStatus.textContent = statusMessages[messageIndex];
+        
+        // Glitch effect on status change
+        loadingStatus.style.animation = 'none';
+        loadingStatus.offsetHeight;
+        loadingStatus.style.animation = 'statusGlitch 0.3s';
+        setTimeout(() => {
+          loadingStatus.style.animation = 'statusGlitch 3s infinite';
+        }, 300);
+      }
+    }
+  }, 100);
+  
+  // Disable scrolling while loading
+  document.body.style.overflow = 'hidden';
+}
+
+// Create floating particles
+function createLoadingParticles() {
+  const container = document.getElementById('loadingParticles');
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'loading-particle';
+    
+    // Random position
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    
+    // Random size
+    const size = Math.random() * 3 + 1;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    // Random color
+    if (Math.random() > 0.5) {
+      particle.style.background = '#f0f';
+      particle.style.boxShadow = '0 0 10px #f0f, 0 0 20px #f0f';
+    }
+    
+    container.appendChild(particle);
+  }
+}
+
+// Create binary rain effect
+function createBinaryRain() {
+  const container = document.getElementById('binaryRain');
+  const columnCount = Math.floor(window.innerWidth / 30);
+  
+  for (let i = 0; i < columnCount; i++) {
+    const column = document.createElement('div');
+    column.className = 'binary-column';
+    
+    // Random position
+    column.style.left = (i * 30) + 'px';
+    column.style.animationDuration = (Math.random() * 5 + 3) + 's';
+    column.style.animationDelay = Math.random() * 5 + 's';
+    
+    // Generate random binary string
+    let binaryString = '';
+    const length = Math.floor(Math.random() * 10 + 5);
+    for (let j = 0; j < length; j++) {
+      binaryString += Math.random() > 0.5 ? '1' : '0';
+      binaryString += '<br>';
+    }
+    
+    column.innerHTML = binaryString;
+    container.appendChild(column);
+  }
+}
+
+// ===== 3D HOLOGRAM EFFECT WITH THREE.JS =====
+function initHologramEffect() {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+  
+  const hologramContainer = document.querySelector('.hologram-container');
+  hologramContainer.style.position = 'relative';
+  hologramContainer.style.zIndex = '10';
+  
+  // Create floating cubes
+  const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+  
+  for (let i = 0; i < 20; i++) {
+    const material = new THREE.MeshBasicMaterial({ 
+      color: Math.random() > 0.5 ? 0x00ffff : 0xff00ff,
+      transparent: true,
+      opacity: 0.3,
+      wireframe: true
+    });
+    
+    const cube = new THREE.Mesh(geometry, material);
+    
+    // Random position around the hologram
+    const radius = 3;
+    const angle = (i / 20) * Math.PI * 2;
+    cube.position.x = Math.cos(angle) * radius;
+    cube.position.z = Math.sin(angle) * radius;
+    cube.position.y = (Math.random() - 0.5) * 2;
+    
+    // Animation properties
+    cube.userData = {
+      speed: 0.01 + Math.random() * 0.02,
+      angle: angle,
+      radius: radius,
+      yOffset: cube.position.y
+    };
+    
+    scene.add(cube);
+  }
+  
+  camera.position.z = 5;
+  
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Rotate cubes
+    scene.children.forEach(cube => {
+      if (cube.isMesh) {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.02;
+        
+        // Orbit animation
+        cube.userData.angle += cube.userData.speed;
+        cube.position.x = Math.cos(cube.userData.angle) * cube.userData.radius;
+        cube.position.z = Math.sin(cube.userData.angle) * cube.userData.radius;
+        cube.position.y = cube.userData.yOffset + Math.sin(Date.now() * 0.001) * 0.5;
+      }
+    });
+    
+    renderer.render(scene, camera);
+  }
+  
+  animate();
+  
+  // Add canvas to hologram container
+  const canvas = renderer.domElement;
+  canvas.style.position = 'absolute';
+  canvas.style.top = '50%';
+  canvas.style.left = '50%';
+  canvas.style.transform = 'translate(-50%, -50%)';
+  canvas.style.width = '400px';
+  canvas.style.height = '400px';
+  canvas.style.pointerEvents = 'none';
+  
+  hologramContainer.appendChild(canvas);
+}
+
+// ===== GLITCH TEXT EFFECT =====
+function glitchText(element, text) {
+  const chars = '!<>-_\\/[]{}—=+*^?#________';
+  
+  let interval = setInterval(() => {
+    let newText = '';
+    for (let i = 0; i < text.length; i++) {
+      if (Math.random() < 0.1) {
+        newText += chars[Math.floor(Math.random() * chars.length)];
+      } else {
+        newText += text[i];
+      }
+    }
+    element.textContent = newText;
+  }, 50);
+  
+  setTimeout(() => {
+    clearInterval(interval);
+    element.textContent = text;
+  }, 500);
+}
+
+// Initialize loading screen
+document.addEventListener('DOMContentLoaded', () => {
+  initFuturisticLoader();
+  initHologramEffect();
+  
+  // Glitch effect on status text periodically
+  setInterval(() => {
+    const status = document.getElementById('loadingStatus');
+    if (!document.getElementById('loadingScreen').classList.contains('hidden')) {
+      glitchText(status, status.textContent);
+    }
+  }, 3000);
+});
+
+// Resize handler for binary rain
+window.addEventListener('resize', () => {
+  const binaryRain = document.getElementById('binaryRain');
+  binaryRain.innerHTML = '';
+  createBinaryRain();
+});
+
 // ===== CUSTOM CURSOR =====
 function initCursor() {
     const cursorGlow = document.getElementById('cursorGlow');
