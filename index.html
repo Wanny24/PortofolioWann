@@ -2,13 +2,16 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Irwan Yuandri | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Irwan Yuandri | Futuristic Portfolio</title>
   
   <!-- Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Preload untuk performa -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
 </head>
 <body>
   <!-- Particle Canvas Background -->
@@ -19,64 +22,64 @@
   <div class="cursor-dot" id="cursorDot"></div>
   
   <!-- FUTURISTIC LOADING SCREEN -->
-<div class="loading-screen" id="loadingScreen">
-  <!-- Cyber Grid Background -->
-  <div class="loading-grid"></div>
-  
-  <!-- Floating Particles -->
-  <div class="loading-particles" id="loadingParticles"></div>
-  
-  <!-- Holographic Circle -->
-  <div class="hologram-container">
-    <div class="hologram-ring ring-1"></div>
-    <div class="hologram-ring ring-2"></div>
-    <div class="hologram-ring ring-3"></div>
-    <div class="hologram-ring ring-4"></div>
+  <div class="loading-screen" id="loadingScreen">
+    <!-- Cyber Grid Background -->
+    <div class="loading-grid"></div>
     
-    <!-- Core Logo/Icon -->
-    <div class="hologram-core">
-      <div class="core-pulse"></div>
-      <div class="core-text">IY</div>
+    <!-- Floating Particles -->
+    <div class="loading-particles" id="loadingParticles"></div>
+    
+    <!-- Holographic Circle -->
+    <div class="hologram-container">
+      <div class="hologram-ring ring-1"></div>
+      <div class="hologram-ring ring-2"></div>
+      <div class="hologram-ring ring-3"></div>
+      <div class="hologram-ring ring-4"></div>
+      
+      <!-- Core Logo/Icon -->
+      <div class="hologram-core">
+        <div class="core-pulse"></div>
+        <div class="core-text">IY</div>
+      </div>
+      
+      <!-- Orbiting Elements -->
+      <div class="orbit orbit-1">
+        <div class="satellite"></div>
+      </div>
+      <div class="orbit orbit-2">
+        <div class="satellite"></div>
+      </div>
+      <div class="orbit orbit-3">
+        <div class="satellite"></div>
+      </div>
     </div>
     
-    <!-- Orbiting Elements -->
-    <div class="orbit orbit-1">
-      <div class="satellite"></div>
+    <!-- Loading Bar -->
+    <div class="loading-bar-container">
+      <div class="loading-bar-glow"></div>
+      <div class="loading-bar" id="loadingBar">
+        <div class="loading-bar-progress" id="loadingProgress"></div>
+      </div>
+      <div class="loading-percentage" id="loadingPercentage">0%</div>
     </div>
-    <div class="orbit orbit-2">
-      <div class="satellite"></div>
+    
+    <!-- Status Text -->
+    <div class="loading-status">
+      <span class="status-glitch" id="loadingStatus">INITIALIZING SYSTEM</span>
+      <span class="status-cursor">_</span>
     </div>
-    <div class="orbit orbit-3">
-      <div class="satellite"></div>
-    </div>
-  </div>
-  
-  <!-- Loading Bar -->
-  <div class="loading-bar-container">
-    <div class="loading-bar-glow"></div>
-    <div class="loading-bar" id="loadingBar">
-      <div class="loading-bar-progress" id="loadingProgress"></div>
-    </div>
-    <div class="loading-percentage" id="loadingPercentage">0%</div>
-  </div>
-  
-  <!-- Status Text -->
-  <div class="loading-status">
-    <span class="status-glitch" id="loadingStatus">INITIALIZING SYSTEM</span>
-    <span class="status-cursor">_</span>
-  </div>
-  
-  <!-- Binary Rain -->
-  <div class="binary-rain" id="binaryRain"></div>
-  
-  <!-- Scanning Line -->
-  <div class="scanning-line"></div>
+    
+    <!-- Binary Rain -->
+    <div class="binary-rain" id="binaryRain"></div>
+    
+    <!-- Scanning Line -->
+    <div class="scanning-line"></div>
   </div>
 
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo">IY<span class="text-cyan">.</span></a>
+      <a href="#" class="nav-logo">IY<span class="text-gradient">.</span></a>
       <div class="nav-menu" id="navMenu">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#about" class="nav-link">About</a>
@@ -98,42 +101,92 @@
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-particles" id="heroParticles"></div>
+    
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge" data-aos="fade-up">
           <span class="glitch-text">WELCOME TO THE FUTURE</span>
         </div>
-        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
-          <span class="gradient-text">Irwan Yuandri</span>
-        </h1>
-        <div class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-          <div class="typewriter" id="typewriter"></div>
+        
+        <div class="hero-main">
+          <!-- LEFT SIDE - Text Content -->
+          <div class="hero-text-content">
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+              <span class="gradient-text">Irwan Yuandri</span>
+            </h1>
+            <div class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+              <div class="typewriter" id="typewriter"></div>
+            </div>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
+              Crafting digital experiences with code & creativity
+            </p>
+            <div class="hero-cta" data-aos="fade-up" data-aos-delay="800">
+              <a href="#contact" class="btn btn-primary">
+                <span>Start Project</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="#about" class="btn btn-outline">
+                <span>Explore</span>
+                <i class="fas fa-chevron-down"></i>
+              </a>
+            </div>
+            <div class="hero-social" data-aos="fade-up" data-aos-delay="1000">
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+          
+          <!-- RIGHT SIDE - Animated Computer -->
+          <div class="hero-animation" data-aos="fade-up" data-aos-delay="300">
+            <div class="animation-container">
+              <!-- 3D Floating Computer -->
+              <div class="floating-computer">
+                <div class="computer-screen">
+                  <div class="screen-content">
+                    <div class="code-animation">
+                      <div class="code-line line-1">function createFuture() {</div>
+                      <div class="code-line line-2">  return 'portfolio';</div>
+                      <div class="code-line line-3">}</div>
+                      <div class="code-line line-4">const result = createFuture();</div>
+                      <div class="code-line line-5">console.log(result);</div>
+                    </div>
+                  </div>
+                  <div class="screen-glow"></div>
+                </div>
+                <div class="computer-base"></div>
+                <div class="computer-stand"></div>
+              </div>
+              
+              <!-- Orbiting Tech Icons -->
+              <div class="tech-orbit">
+                <div class="tech-icon icon-1"><i class="fas fa-code"></i></div>
+                <div class="tech-icon icon-2"><i class="fas fa-paint-brush"></i></div>
+                <div class="tech-icon icon-3"><i class="fas fa-video"></i></div>
+                <div class="tech-icon icon-4"><i class="fas fa-robot"></i></div>
+                <div class="tech-icon icon-5"><i class="fas fa-database"></i></div>
+                <div class="tech-icon icon-6"><i class="fas fa-cloud"></i></div>
+              </div>
+              
+              <!-- Floating Circles -->
+              <div class="floating-circles">
+                <div class="circle c1"></div>
+                <div class="circle c2"></div>
+                <div class="circle c3"></div>
+                <div class="circle c4"></div>
+                <div class="circle c5"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
-          Crafting digital experiences with code & creativity
-        </p>
-        <div class="hero-cta" data-aos="fade-up" data-aos-delay="800">
-          <a href="#contact" class="btn btn-primary">
-            <span>Start Project</span>
-            <i class="fas fa-arrow-right"></i>
-          </a>
-          <a href="#about" class="btn btn-outline">
-            <span>Explore</span>
-            <i class="fas fa-chevron-down"></i>
-          </a>
-        </div>
-        <div class="hero-social" data-aos="fade-up" data-aos-delay="1000">
-          <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
-      <div class="hero-scroll" data-aos="fade-up">
-        <div class="scroll-indicator">
-          <span></span>
-          <span></span>
-          <span></span>
+        
+        <div class="hero-scroll" data-aos="fade-up">
+          <div class="scroll-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
     </div>
@@ -152,7 +205,7 @@
         <div class="about-image" data-aos="fade-right">
           <div class="image-frame">
             <div class="image-glitch">
-              <img src="https://i.pravatar.cc/500?img=12" alt="Profile">
+              <img src="https://i.pravatar.cc/500?img=12" alt="Profile" loading="lazy">
             </div>
             <div class="frame-corners"></div>
           </div>
@@ -226,193 +279,193 @@
     </div>
   </section>
 
-  <!-- Experience Section - REVISED -->
-<section id="experience" class="experience">
-  <div class="container">
-    <div class="section-header" data-aos="fade-up">
-      <span class="section-subtitle">JOURNEY</span>
-      <h2 class="section-title">Work Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    
-    <!-- 3D Cards Experience -->
-    <div class="experience-cards" data-aos="fade-up">
-      
-      <!-- Card 1 - Galaxy Digital Niaga -->
-      <div class="exp-card glass-card" onclick="openExpModal('galaxy')">
-        <div class="exp-card-inner">
-          <div class="exp-front">
-            <div class="exp-icon">
-              <i class="fas fa-video"></i>
-            </div>
-            <h3>PT. Galaxy Digital Niaga</h3>
-            <p class="exp-position">Designer Grafis & Video Editor</p>
-            <div class="exp-date">
-              <i class="far fa-calendar-alt"></i>
-              <span>Feb 2024 - Now</span>
-            </div>
-            <div class="exp-preview">
-              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
-            </div>
-          </div>
-        </div>
-        <div class="exp-glow"></div>
+  <!-- Experience Section -->
+  <section id="experience" class="experience">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">JOURNEY</span>
+        <h2 class="section-title">Work Experience</h2>
+        <div class="section-line"></div>
       </div>
       
-      <!-- Card 2 - Wijaya Group -->
-      <div class="exp-card glass-card" onclick="openExpModal('wijaya')">
-        <div class="exp-card-inner">
-          <div class="exp-front">
-            <div class="exp-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Wijaya Group</h3>
-            <p class="exp-position">Social Media Marketing</p>
-            <div class="exp-date">
-              <i class="far fa-calendar-alt"></i>
-              <span>July 2023 - Feb 2024</span>
-            </div>
-            <div class="exp-preview">
-              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
-            </div>
-          </div>
-        </div>
-        <div class="exp-glow"></div>
-      </div>
-      
-      <!-- Card 3 - Beanbagkit -->
-      <div class="exp-card glass-card" onclick="openExpModal('beanbag')">
-        <div class="exp-card-inner">
-          <div class="exp-front">
-            <div class="exp-icon">
-              <i class="fas fa-shopping-cart"></i>
-            </div>
-            <h3>Beanbagkit</h3>
-            <p class="exp-position">Designer & E-commerce Staff</p>
-            <div class="exp-date">
-              <i class="far fa-calendar-alt"></i>
-              <span>May 2022 - June 2023</span>
-            </div>
-            <div class="exp-preview">
-              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+      <!-- 3D Cards Experience -->
+      <div class="experience-cards" data-aos="fade-up">
+        
+        <!-- Card 1 - Galaxy Digital Niaga -->
+        <div class="exp-card glass-card" onclick="openExpModal('galaxy')">
+          <div class="exp-card-inner">
+            <div class="exp-front">
+              <div class="exp-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <h3>PT. Galaxy Digital Niaga</h3>
+              <p class="exp-position">Designer Grafis & Video Editor</p>
+              <div class="exp-date">
+                <i class="far fa-calendar-alt"></i>
+                <span>Feb 2024 - Now</span>
+              </div>
+              <div class="exp-preview">
+                <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="exp-glow"></div>
-      </div>
-      
-    </div>
-    
-    <!-- Timeline Experience (Alternative View) -->
-    <div class="experience-timeline" data-aos="fade-up">
-      <h3 class="timeline-title">Career Path</h3>
-      
-      <div class="timeline-container">
-        <!-- Timeline Item 1 -->
-        <div class="timeline-item-exp" onclick="openExpModal('galaxy')">
-          <div class="timeline-dot"></div>
-          <div class="timeline-line"></div>
-          <div class="timeline-content-exp glass-card">
-            <div class="timeline-date-badge">2024 - Present</div>
-            <h4>PT. Galaxy Digital Niaga</h4>
-            <p class="timeline-role">Designer Grafis & Video Editor</p>
-            <div class="timeline-hover">
-              <span>Click for details</span>
-              <i class="fas fa-chevron-right"></i>
-            </div>
-          </div>
+          <div class="exp-glow"></div>
         </div>
         
-        <!-- Timeline Item 2 -->
-        <div class="timeline-item-exp" onclick="openExpModal('wijaya')">
-          <div class="timeline-dot"></div>
-          <div class="timeline-line"></div>
-          <div class="timeline-content-exp glass-card">
-            <div class="timeline-date-badge">2023 - 2024</div>
-            <h4>Wijaya Group</h4>
-            <p class="timeline-role">Social Media Marketing</p>
-            <div class="timeline-hover">
-              <span>Click for details</span>
-              <i class="fas fa-chevron-right"></i>
+        <!-- Card 2 - Wijaya Group -->
+        <div class="exp-card glass-card" onclick="openExpModal('wijaya')">
+          <div class="exp-card-inner">
+            <div class="exp-front">
+              <div class="exp-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Wijaya Group</h3>
+              <p class="exp-position">Social Media Marketing</p>
+              <div class="exp-date">
+                <i class="far fa-calendar-alt"></i>
+                <span>July 2023 - Feb 2024</span>
+              </div>
+              <div class="exp-preview">
+                <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+              </div>
             </div>
           </div>
+          <div class="exp-glow"></div>
         </div>
         
-        <!-- Timeline Item 3 -->
-        <div class="timeline-item-exp" onclick="openExpModal('beanbag')">
-          <div class="timeline-dot"></div>
-          <div class="timeline-line"></div>
-          <div class="timeline-content-exp glass-card">
-            <div class="timeline-date-badge">2022 - 2023</div>
-            <h4>Beanbagkit</h4>
-            <p class="timeline-role">Designer & E-commerce Staff</p>
-            <div class="timeline-hover">
-              <span>Click for details</span>
-              <i class="fas fa-chevron-right"></i>
+        <!-- Card 3 - Beanbagkit -->
+        <div class="exp-card glass-card" onclick="openExpModal('beanbag')">
+          <div class="exp-card-inner">
+            <div class="exp-front">
+              <div class="exp-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <h3>Beanbagkit</h3>
+              <p class="exp-position">Designer & E-commerce Staff</p>
+              <div class="exp-date">
+                <i class="far fa-calendar-alt"></i>
+                <span>May 2022 - June 2023</span>
+              </div>
+              <div class="exp-preview">
+                <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+              </div>
+            </div>
+          </div>
+          <div class="exp-glow"></div>
+        </div>
+        
+      </div>
+      
+      <!-- Timeline Experience (Alternative View) -->
+      <div class="experience-timeline" data-aos="fade-up">
+        <h3 class="timeline-title">Career Path</h3>
+        
+        <div class="timeline-container">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item-exp" onclick="openExpModal('galaxy')">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content-exp glass-card">
+              <div class="timeline-date-badge">2024 - Present</div>
+              <h4>PT. Galaxy Digital Niaga</h4>
+              <p class="timeline-role">Designer Grafis & Video Editor</p>
+              <div class="timeline-hover">
+                <span>Click for details</span>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item-exp" onclick="openExpModal('wijaya')">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content-exp glass-card">
+              <div class="timeline-date-badge">2023 - 2024</div>
+              <h4>Wijaya Group</h4>
+              <p class="timeline-role">Social Media Marketing</p>
+              <div class="timeline-hover">
+                <span>Click for details</span>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item-exp" onclick="openExpModal('beanbag')">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+            <div class="timeline-content-exp glass-card">
+              <div class="timeline-date-badge">2022 - 2023</div>
+              <h4>Beanbagkit</h4>
+              <p class="timeline-role">Designer & E-commerce Staff</p>
+              <div class="timeline-hover">
+                <span>Click for details</span>
+                <i class="fas fa-chevron-right"></i>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <!-- View Toggle -->
+      <div class="exp-view-toggle" data-aos="fade-up">
+        <button class="view-btn active" onclick="toggleExpView('cards')">
+          <i class="fas fa-th-large"></i> Cards
+        </button>
+        <button class="view-btn" onclick="toggleExpView('timeline')">
+          <i class="fas fa-stream"></i> Timeline
+        </button>
+      </div>
+      
     </div>
-    
-    <!-- View Toggle -->
-    <div class="exp-view-toggle" data-aos="fade-up">
-      <button class="view-btn active" onclick="toggleExpView('cards')">
-        <i class="fas fa-th-large"></i> Cards
-      </button>
-      <button class="view-btn" onclick="toggleExpView('timeline')">
-        <i class="fas fa-stream"></i> Timeline
-      </button>
-    </div>
-    
-  </div>
-</section>
+  </section>
 
-<!-- MODAL POPUP for Experience Details -->
-<div id="expModal" class="exp-modal">
-  <div class="exp-modal-content glass-card">
-    <button class="exp-modal-close" onclick="closeExpModal()">
-      <i class="fas fa-times"></i>
-    </button>
-    
-    <div class="exp-modal-header">
-      <div class="exp-modal-icon" id="modalIcon">
-        <i class="fas fa-briefcase"></i>
-      </div>
-      <h2 id="modalCompany">PT. Galaxy Digital Niaga</h2>
-      <p class="exp-modal-period" id="modalPeriod">Feb 2024 - Now</p>
-    </div>
-    
-    <div class="exp-modal-body">
-      <div class="exp-modal-section">
-        <h3><i class="fas fa-clipboard-list"></i> Job Description</h3>
-        <ul id="modalJobdesc">
-          <!-- Will be filled by JavaScript -->
-        </ul>
+  <!-- MODAL POPUP for Experience Details -->
+  <div id="expModal" class="exp-modal">
+    <div class="exp-modal-content glass-card">
+      <button class="exp-modal-close" onclick="closeExpModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="exp-modal-header">
+        <div class="exp-modal-icon" id="modalIcon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h2 id="modalCompany">PT. Galaxy Digital Niaga</h2>
+        <p class="exp-modal-period" id="modalPeriod">Feb 2024 - Now</p>
       </div>
       
-      <div class="exp-modal-section">
-        <h3><i class="fas fa-star"></i> Achievements</h3>
-        <ul id="modalAchievements">
-          <!-- Will be filled by JavaScript -->
-        </ul>
-      </div>
-      
-      <div class="exp-modal-section">
-        <h3><i class="fas fa-tools"></i> Skills Used</h3>
-        <div class="modal-tags" id="modalSkills">
-          <!-- Will be filled by JavaScript -->
+      <div class="exp-modal-body">
+        <div class="exp-modal-section">
+          <h3><i class="fas fa-clipboard-list"></i> Job Description</h3>
+          <ul id="modalJobdesc">
+            <!-- Will be filled by JavaScript -->
+          </ul>
+        </div>
+        
+        <div class="exp-modal-section">
+          <h3><i class="fas fa-star"></i> Achievements</h3>
+          <ul id="modalAchievements">
+            <!-- Will be filled by JavaScript -->
+          </ul>
+        </div>
+        
+        <div class="exp-modal-section">
+          <h3><i class="fas fa-tools"></i> Skills Used</h3>
+          <div class="modal-tags" id="modalSkills">
+            <!-- Will be filled by JavaScript -->
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="exp-modal-footer">
-      <button class="btn btn-primary" onclick="closeExpModal()">
-        <span>Close</span>
-      </button>
+      
+      <div class="exp-modal-footer">
+        <button class="btn btn-primary" onclick="closeExpModal()">
+          <span>Close</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- Projects Section -->
   <section id="projects" class="projects">
@@ -463,13 +516,13 @@
           <div class="info-card glass-card">
             <i class="fas fa-envelope"></i>
             <h3>Email</h3>
-            <p>mewann.id@email.com</p>
+            <p>irwan.yuandri@email.com</p>
           </div>
           
           <div class="info-card glass-card">
             <i class="fas fa-phone-alt"></i>
             <h3>Phone</h3>
-            <p>+62855 1115 118</p>
+            <p>+62 812 3456 7890</p>
           </div>
         </div>
         

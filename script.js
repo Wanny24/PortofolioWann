@@ -1,24 +1,21 @@
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
+    initFuturisticLoader();
+    initHologramEffect();
     initCursor();
     initParticles();
     initNavbar();
     initTypewriter();
+    initHeroAnimations();
     initCounters();
     initSkills();
     initProjects();
     initContactForm();
     initBackToTop();
     initAOS();
+    handleResponsive();
+    optimizeForTouch();
 });
-
-// ===== LOADER =====
-function initLoader() {
-    setTimeout(() => {
-        document.getElementById('loadingScreen').classList.add('hidden');
-    }, 1500);
-}
 
 // ===== FUTURISTIC LOADING SCREEN =====
 function initFuturisticLoader() {
@@ -94,6 +91,8 @@ function initFuturisticLoader() {
 // Create floating particles
 function createLoadingParticles() {
   const container = document.getElementById('loadingParticles');
+  if (!container) return;
+  
   const particleCount = 50;
   
   for (let i = 0; i < particleCount; i++) {
@@ -110,10 +109,13 @@ function createLoadingParticles() {
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
     
-    // Random color
+    // Random color - purple theme
     if (Math.random() > 0.5) {
-      particle.style.background = '#f0f';
-      particle.style.boxShadow = '0 0 10px #f0f, 0 0 20px #f0f';
+      particle.style.background = '#a463f5';
+      particle.style.boxShadow = '0 0 10px #a463f5, 0 0 20px #a463f5';
+    } else {
+      particle.style.background = '#6c5ce7';
+      particle.style.boxShadow = '0 0 10px #6c5ce7, 0 0 20px #6c5ce7';
     }
     
     container.appendChild(particle);
@@ -123,6 +125,11 @@ function createLoadingParticles() {
 // Create binary rain effect
 function createBinaryRain() {
   const container = document.getElementById('binaryRain');
+  if (!container) return;
+  
+  // Clear existing
+  container.innerHTML = '';
+  
   const columnCount = Math.floor(window.innerWidth / 30);
   
   for (let i = 0; i < columnCount; i++) {
@@ -143,12 +150,19 @@ function createBinaryRain() {
     }
     
     column.innerHTML = binaryString;
+    column.style.color = 'rgba(108, 92, 231, 0.3)';
     container.appendChild(column);
   }
 }
 
 // ===== 3D HOLOGRAM EFFECT WITH THREE.JS =====
 function initHologramEffect() {
+  // Check if THREE is available
+  if (typeof THREE === 'undefined') return;
+  
+  const hologramContainer = document.querySelector('.hologram-container');
+  if (!hologramContainer) return;
+  
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -156,7 +170,6 @@ function initHologramEffect() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x000000, 0);
   
-  const hologramContainer = document.querySelector('.hologram-container');
   hologramContainer.style.position = 'relative';
   hologramContainer.style.zIndex = '10';
   
@@ -165,7 +178,7 @@ function initHologramEffect() {
   
   for (let i = 0; i < 20; i++) {
     const material = new THREE.MeshBasicMaterial({ 
-      color: Math.random() > 0.5 ? 0x00ffff : 0xff00ff,
+      color: Math.random() > 0.5 ? 0x6c5ce7 : 0xa463f5,
       transparent: true,
       opacity: 0.3,
       wireframe: true
@@ -250,31 +263,12 @@ function glitchText(element, text) {
   }, 500);
 }
 
-// Initialize loading screen
-document.addEventListener('DOMContentLoaded', () => {
-  initFuturisticLoader();
-  initHologramEffect();
-  
-  // Glitch effect on status text periodically
-  setInterval(() => {
-    const status = document.getElementById('loadingStatus');
-    if (!document.getElementById('loadingScreen').classList.contains('hidden')) {
-      glitchText(status, status.textContent);
-    }
-  }, 3000);
-});
-
-// Resize handler for binary rain
-window.addEventListener('resize', () => {
-  const binaryRain = document.getElementById('binaryRain');
-  binaryRain.innerHTML = '';
-  createBinaryRain();
-});
-
 // ===== CUSTOM CURSOR =====
 function initCursor() {
     const cursorGlow = document.getElementById('cursorGlow');
     const cursorDot = document.getElementById('cursorDot');
+    
+    if (!cursorGlow || !cursorDot) return;
     
     document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = e.clientX + 'px';
@@ -283,7 +277,7 @@ function initCursor() {
         cursorDot.style.top = e.clientY + 'px';
     });
     
-    document.querySelectorAll('a, button, .project-card, .skill-tag').forEach(el => {
+    document.querySelectorAll('a, button, .project-card, .skill-tag, .exp-card').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursorDot.classList.add('hover');
         });
@@ -296,9 +290,12 @@ function initCursor() {
 
 // ===== 3D PARTICLES =====
 function initParticles() {
+    const canvas = document.getElementById('particleCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particleCanvas'), alpha: true });
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -313,9 +310,10 @@ function initParticles() {
         positions[i + 1] = (Math.random() - 0.5) * 100;
         positions[i + 2] = (Math.random() - 0.5) * 100;
         
-        colors[i] = Math.random() * 0.5 + 0.5;
-        colors[i + 1] = Math.random() * 0.5 + 0.5;
-        colors[i + 2] = Math.random();
+        // Purple/blue color scheme
+        colors[i] = 0.4 + Math.random() * 0.4; // R
+        colors[i + 1] = 0.2 + Math.random() * 0.3; // G (low for purple)
+        colors[i + 2] = 0.8 + Math.random() * 0.2; // B (high for purple)
     }
     
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -370,6 +368,8 @@ function initNavbar() {
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');
     
+    if (!navbar || !menuToggle || !navMenu) return;
+    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -412,23 +412,27 @@ function initNavbar() {
     
     // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
-    const icon = themeToggle.querySelector('i');
-    
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
         
-        if (document.body.classList.contains('light-theme')) {
-            icon.className = 'fas fa-sun';
-        } else {
-            icon.className = 'fas fa-moon';
-        }
-    });
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            
+            if (document.body.classList.contains('light-theme')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        });
+    }
 }
 
 // ===== TYPEWRITER =====
 function initTypewriter() {
-    const words = ['Web Developer', 'UI/UX Designer', 'Creative Technologist', 'Problem Solver'];
     const typewriter = document.getElementById('typewriter');
+    if (!typewriter) return;
+    
+    const words = ['Web Developer', 'UI/UX Designer', 'Creative Technologist', 'Problem Solver'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -459,11 +463,50 @@ function initTypewriter() {
     type();
 }
 
+// ===== HERO ANIMATIONS =====
+function initHeroAnimations() {
+    // Continuous code typing effect on computer screen
+    const codeLines = document.querySelectorAll('.code-line');
+    if (codeLines.length > 0) {
+        let currentLine = 0;
+        
+        function animateCode() {
+            codeLines.forEach(line => {
+                line.style.animation = 'none';
+                line.offsetHeight;
+                line.style.animation = null;
+            });
+            
+            currentLine = (currentLine + 1) % codeLines.length;
+        }
+        
+        setInterval(animateCode, 3000);
+    }
+    
+    // Mouse move parallax effect for computer (only on desktop)
+    const computer = document.querySelector('.floating-computer');
+    if (computer && window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+            const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            computer.style.transform = `translate(-50%, -50%) rotateY(${mouseX}deg) rotateX(${-mouseY}deg)`;
+        });
+        
+        // Reset on mouse leave
+        document.addEventListener('mouseleave', () => {
+            computer.style.transform = 'translate(-50%, -50%) rotateY(0) rotateX(0)';
+        });
+    }
+}
+
 // ===== COUNTERS =====
 function initCounters() {
     const yearsExp = document.getElementById('yearsExp');
     const projectsDone = document.getElementById('projectsDone');
     const clientsServed = document.getElementById('clientsServed');
+    
+    if (!yearsExp || !projectsDone || !clientsServed) return;
     
     const counters = [
         { element: yearsExp, target: 2, duration: 2000 },
@@ -482,7 +525,10 @@ function initCounters() {
         });
     }, { threshold: 0.5 });
     
-    observer.observe(document.querySelector('.image-stats'));
+    const statsSection = document.querySelector('.image-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
 }
 
 function animateCounter(element, target, duration) {
@@ -584,27 +630,37 @@ function openExpModal(companyId) {
   const modal = document.getElementById('expModal');
   const data = experienceData[companyId];
   
-  if (!data) return;
+  if (!modal || !data) return;
   
   // Set icon
   const modalIcon = document.getElementById('modalIcon');
-  modalIcon.innerHTML = `<i class="fas ${data.icon}"></i>`;
+  if (modalIcon) {
+    modalIcon.innerHTML = `<i class="fas ${data.icon}"></i>`;
+  }
   
   // Set header
-  document.getElementById('modalCompany').textContent = data.company;
-  document.getElementById('modalPeriod').textContent = data.period;
+  const modalCompany = document.getElementById('modalCompany');
+  const modalPeriod = document.getElementById('modalPeriod');
+  if (modalCompany) modalCompany.textContent = data.company;
+  if (modalPeriod) modalPeriod.textContent = data.period;
   
   // Set jobdesc
   const jobdescList = document.getElementById('modalJobdesc');
-  jobdescList.innerHTML = data.jobdesc.map(desc => `<li>${desc}</li>`).join('');
+  if (jobdescList) {
+    jobdescList.innerHTML = data.jobdesc.map(desc => `<li>${desc}</li>`).join('');
+  }
   
   // Set achievements
   const achievementsList = document.getElementById('modalAchievements');
-  achievementsList.innerHTML = data.achievements.map(achievement => `<li>${achievement}</li>`).join('');
+  if (achievementsList) {
+    achievementsList.innerHTML = data.achievements.map(achievement => `<li>${achievement}</li>`).join('');
+  }
   
   // Set skills
   const skillsContainer = document.getElementById('modalSkills');
-  skillsContainer.innerHTML = data.skills.map(skill => `<span>${skill}</span>`).join('');
+  if (skillsContainer) {
+    skillsContainer.innerHTML = data.skills.map(skill => `<span>${skill}</span>`).join('');
+  }
   
   // Show modal
   modal.classList.add('show');
@@ -612,14 +668,18 @@ function openExpModal(companyId) {
   
   // Add animation to modal content
   const modalContent = modal.querySelector('.exp-modal-content');
-  modalContent.style.animation = 'none';
-  modalContent.offsetHeight; // Trigger reflow
-  modalContent.style.animation = 'modalFadeIn 0.3s ease forwards';
+  if (modalContent) {
+    modalContent.style.animation = 'none';
+    modalContent.offsetHeight; // Trigger reflow
+    modalContent.style.animation = 'modalFadeIn 0.3s ease forwards';
+  }
 }
 
 // Fungsi untuk menutup modal
 function closeExpModal() {
   const modal = document.getElementById('expModal');
+  if (!modal) return;
+  
   modal.classList.remove('show');
   document.body.style.overflow = ''; // Restore scrolling
 }
@@ -627,7 +687,7 @@ function closeExpModal() {
 // Tutup modal jika klik di luar content
 window.addEventListener('click', (e) => {
   const modal = document.getElementById('expModal');
-  if (e.target === modal) {
+  if (modal && e.target === modal) {
     closeExpModal();
   }
 });
@@ -645,6 +705,8 @@ function toggleExpView(view) {
   const timelineView = document.querySelector('.experience-timeline');
   const viewBtns = document.querySelectorAll('.view-btn');
   
+  if (!cardsView || !timelineView || viewBtns.length < 2) return;
+  
   if (view === 'cards') {
     cardsView.style.display = 'grid';
     timelineView.classList.remove('active');
@@ -661,6 +723,8 @@ function toggleExpView(view) {
 // ===== HOVER EFFECT UNTUK CARDS =====
 document.querySelectorAll('.exp-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
+    if (window.innerWidth <= 768) return; // Disable on mobile
+    
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -679,15 +743,14 @@ document.querySelectorAll('.exp-card').forEach(card => {
   });
 });
 
-// ===== INITIALIZE =====
-// Set default view
-document.addEventListener('DOMContentLoaded', () => {
-  // Timeline view dimulai sebagai hidden
-  document.querySelector('.experience-timeline').classList.remove('active');
-});
-
 // ===== PROJECTS =====
 function initProjects() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    
+    if (!projectsGrid) return;
+    
     const projects = [
         {
             category: 'web',
@@ -733,9 +796,6 @@ function initProjects() {
         }
     ];
     
-    const projectsGrid = document.getElementById('projectsGrid');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
     let currentFilter = 'all';
     let visibleProjects = 3;
     
@@ -748,7 +808,7 @@ function initProjects() {
         
         projectsGrid.innerHTML = toShow.map(project => `
             <div class="project-card" data-category="${project.category}">
-                <img src="${project.image}" alt="${project.title}" class="project-image">
+                <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
                 <div class="project-overlay">
                     <span class="project-category">${project.category}</span>
                     <h3 class="project-title">${project.title}</h3>
@@ -760,23 +820,29 @@ function initProjects() {
             </div>
         `).join('');
         
-        loadMoreBtn.style.display = filtered.length > visibleProjects ? 'inline-flex' : 'none';
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = filtered.length > visibleProjects ? 'inline-flex' : 'none';
+        }
     }
     
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.dataset.filter;
-            visibleProjects = 3;
+    if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                visibleProjects = 3;
+                displayProjects();
+            });
+        });
+    }
+    
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            visibleProjects += 3;
             displayProjects();
         });
-    });
-    
-    loadMoreBtn.addEventListener('click', () => {
-        visibleProjects += 3;
-        displayProjects();
-    });
+    }
     
     displayProjects();
 }
@@ -785,6 +851,8 @@ function initProjects() {
 function initContactForm() {
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
+    
+    if (!form || !submitBtn) return;
     
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -808,6 +876,8 @@ function initContactForm() {
 // ===== BACK TO TOP =====
 function initBackToTop() {
     const backToTop = document.getElementById('backToTop');
+    
+    if (!backToTop) return;
     
     window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
@@ -850,13 +920,14 @@ function initAOS() {
 // ===== HERO PARTICLES (Additional) =====
 function createHeroParticles() {
     const container = document.getElementById('heroParticles');
+    if (!container) return;
     
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'absolute';
         particle.style.width = Math.random() * 5 + 'px';
         particle.style.height = particle.style.width;
-        particle.style.background = `rgba(0, 255, 255, ${Math.random() * 0.5})`;
+        particle.style.background = `rgba(108, 92, 231, ${Math.random() * 0.3 + 0.1})`;
         particle.style.borderRadius = '50%';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
@@ -869,15 +940,78 @@ function createHeroParticles() {
 
 createHeroParticles();
 
-// Add float animation to style
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes float {
-        0% { transform: translate(0, 0) rotate(0deg); }
-        33% { transform: translate(30px, -30px) rotate(120deg); }
-        66% { transform: translate(-30px, 30px) rotate(240deg); }
-        100% { transform: translate(0, 0) rotate(360deg); }
+// ===== RESPONSIVE HANDLING =====
+function handleResponsive() {
+    function adjustForMobile() {
+        if (window.innerWidth <= 768) {
+            // Adjust animation speed for mobile
+            document.querySelectorAll('.tech-icon').forEach(icon => {
+                icon.style.animationDuration = '15s'; // Faster orbit on mobile
+            });
+        } else {
+            document.querySelectorAll('.tech-icon').forEach(icon => {
+                icon.style.animationDuration = '20s';
+            });
+        }
     }
-`;
-document.head.appendChild(style);
+    
+    window.addEventListener('resize', adjustForMobile);
+    adjustForMobile(); // Initial check
+}
 
+// ===== TOUCH DEVICE OPTIMIZATION =====
+function optimizeForTouch() {
+    if ('ontouchstart' in window) {
+        // Disable parallax effects on touch devices
+        const computer = document.querySelector('.floating-computer');
+        if (computer) {
+            computer.style.transform = 'translate(-50%, -50%)';
+        }
+        
+        // Simplify animations
+        document.querySelectorAll('.tech-icon').forEach(icon => {
+            icon.style.animationDuration = '15s';
+        });
+    }
+}
+
+// ===== RESIZE HANDLER =====
+window.addEventListener('resize', () => {
+    const binaryRain = document.getElementById('binaryRain');
+    if (binaryRain) {
+        binaryRain.innerHTML = '';
+        createBinaryRain();
+    }
+});
+
+// Add float animation to style if not exists
+if (!document.querySelector('style[data-float]')) {
+    const style = document.createElement('style');
+    style.setAttribute('data-float', 'true');
+    style.textContent = `
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Set default view untuk experience timeline
+document.addEventListener('DOMContentLoaded', () => {
+    const timelineView = document.querySelector('.experience-timeline');
+    if (timelineView) {
+        timelineView.classList.remove('active');
+    }
+});
+
+// Glitch effect on status text periodically
+setInterval(() => {
+    const status = document.getElementById('loadingStatus');
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (status && loadingScreen && !loadingScreen.classList.contains('hidden')) {
+        glitchText(status, status.textContent);
+    }
+}, 3000);
