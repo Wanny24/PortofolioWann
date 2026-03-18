@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mas Irwan — Ultra Portfolio</title>
+  <title>Portofolio Irwan</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -108,10 +108,18 @@
 
     <!-- LEFT CONTENT -->
     <div class="fade-up">
-      <p class="text-cyan-400 text-sm mb-2 tracking-widest">ABOUT ME</p>
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-        Hi, I'm <span class="text-cyan-400">Irwan Yuandri</span>
+
+      <h2 class="text-3xl md:text-4xl font-semibold text-gray-300">
+        Hi, I'm
       </h2>
+
+      <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400 mb-4">
+        Irwan Yuandri
+      </h1>
+
+      <p class="text-gray-400 mb-6">
+        Web Development | Bot Automation | Graphic Designer
+      </p>
 
       <p class="text-gray-300 leading-relaxed mb-6">
         Active student at Budi Luhur University majoring in informatics engineering. Very interested in digital marketing strategy and graphic design with 2+ years experience. Proven ability to drive sales and improve business outcomes.
@@ -166,7 +174,8 @@
 
         <!-- main card -->
         <div class="glass p-6 rounded-2xl card relative">
-          <img src="https://i.pravatar.cc/300?img=12" class="rounded-xl w-48 sm:w-56 md:w-64 h-auto object-cover">
+          <img src="https://i.pravatar.cc/300?img=12"
+             class="rounded-2xl w-56 sm:w-64 md:w-72 h-[320px] md:h-[420px] object-cover">
 
           <!-- floating badge -->
           
@@ -193,12 +202,23 @@
           <p class="text-gray-400 text-sm">Feb 2024 - Now</p>
           <p class="text-gray-300 mt-2">Designer Grafis & Video Editor — content scheduling, video production, marketplace assets.</p>
         </div>
-        <div class="glass p-6 rounded-xl card md:pl-12">Key impact: improved content consistency & engagement.</div>
-        <div class="tl-dot" style="top: 10px"></div>
+        <div onclick="openModal(
+          'PT. Galaxy Digital Niaga',
+          'Sebagai Designer Grafis & Video Editor, saya bertanggung jawab membuat konten visual, mengatur jadwal posting, serta meningkatkan engagement marketplace melalui strategi visual yang konsisten.'
+        )"
+        class="glass p-6 rounded-xl card cursor-pointer">
+          Key impact: improved content consistency & engagement.
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
-        <div class="glass p-6 rounded-xl card md:pr-12">Managed paid ads & community interactions.</div>
+        <div onclick="openModal(
+          'Wijaya Group',
+          'Mengelola campaign digital marketing, membuat konsep konten, serta berkolaborasi dengan tim untuk meningkatkan awareness dan interaksi audience.'
+        )"
+        class="glass p-6 rounded-xl card cursor-pointer">
+          Managed paid ads & community interactions.
+        </div>
         <div class="md:pl-12">
           <h3 class="font-bold">Wijaya Group</h3>
           <p class="text-gray-400 text-sm">July 2023 - Feb 2024</p>
@@ -213,7 +233,13 @@
           <p class="text-gray-400 text-sm">May 2022 - June 2023</p>
           <p class="text-gray-300 mt-2">Designer & E-commerce Staff — product visuals, listings, operations.</p>
         </div>
-        <div class="glass p-6 rounded-xl card md:pl-12">Handled Shopee/Tokopedia/TikTok Shop operations.</div>
+        <div onclick="openModal(
+          'Beanbagjkt',
+          'Mengelola campaign digital marketing, membuat konsep konten, serta berkolaborasi dengan tim untuk meningkatkan awareness dan interaksi audience.'
+        )"
+        class="glass p-6 rounded-xl card cursor-pointer">
+          Handled Shopee/Tokopedia/TikTok Shop operations
+        </div>
         <div class="tl-dot" style="top: 10px"></div>
       </div>
 

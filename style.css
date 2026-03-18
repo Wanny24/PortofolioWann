@@ -111,3 +111,25 @@ button {
   padding-top: 120px;
   padding-bottom: 80px;
 }
+
+@media (max-width: 768px) {
+
+  .timeline::before {
+    left: 8px;
+  }
+
+  .tl-item {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tl-item > div {
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  .tl-dot {
+    left: 8px;
+    transform: none;
+  }
+
+}
