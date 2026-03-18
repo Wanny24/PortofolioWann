@@ -76,3 +76,29 @@ section {
 button {
   pointer-events: auto;
 }
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  section {
+    padding: 80px 16px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .timeline::before {
+    left: 10px;
+  }
+
+  .tl-dot {
+    left: 10px;
+    transform: none;
+  }
+
+  .tl-item {
+    padding-left: 30px;
+  }
+}

@@ -69,7 +69,7 @@
 <header class="fixed w-full top-0 backdrop-blur z-50">
   <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
     <h1 class="font-bold text-xl">Mas Irwan</h1>
-    <div class="flex gap-6 text-sm" id="navLinks">
+    <div class="flex flex-wrap justify-end gap-4 text-xs sm:text-sm" id="navLinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#project">Project</a>
@@ -84,8 +84,8 @@
   <div class="blob w-80 h-80 bg-blue-500 -bottom-10 -right-10"></div>
 
   <div class="text-center fade-up relative z-10">
-    <h1 class="text-6xl md:text-7xl font-extrabold mb-4">Welcome to my</h1>
-    <h1 class="text-6xl md:text-7xl font-extrabold text-cyan-400 typing" id="typing"></h1>
+    <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold mb-4">Welcome to my</h1>
+    <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold text-cyan-400 typing" id="typing"></h1>
     
     <div class="flex justify-center gap-6 mt-6 text-2xl">
       <a href="https://instagram.com" target="_blank" class="hover:text-pink-400">
@@ -104,7 +104,7 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="max-w-6xl grid md:grid-cols-2 gap-16 items-center">
+  <div class="max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
     <!-- LEFT CONTENT -->
     <div class="fade-up">
@@ -166,7 +166,7 @@
 
         <!-- main card -->
         <div class="glass p-6 rounded-2xl card relative">
-          <img src="https://i.pravatar.cc/300?img=12" class="rounded-xl w-64 h-80 object-cover" alt="profile">
+          <img src="https://i.pravatar.cc/300?img=12" class="rounded-xl w-48 sm:w-56 md:w-64 h-auto object-cover">
 
           <!-- floating badge -->
           
@@ -178,7 +178,6 @@
   </div>
 </section>
 
-<!-- EXPERIENCE --> () -->
 <!-- FIX spacing bug -->
 <div class="h-20"></div>
 
@@ -188,7 +187,7 @@
 
     <div class="space-y-16">
 
-      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
         <div class="md:pr-12 md:text-right">
           <h3 class="font-bold">PT. Galaxy Digital Niaga</h3>
           <p class="text-gray-400 text-sm">Feb 2024 - Now</p>
@@ -198,7 +197,7 @@
         <div class="tl-dot" style="top: 10px"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
         <div class="glass p-6 rounded-xl card md:pr-12">Managed paid ads & community interactions.</div>
         <div class="md:pl-12">
           <h3 class="font-bold">Wijaya Group</h3>
@@ -208,7 +207,7 @@
         <div class="tl-dot" style="top: 10px"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 items-center gap-10 tl-item fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
         <div class="md:pr-12 md:text-right">
           <h3 class="font-bold">Beanbagkit</h3>
           <p class="text-gray-400 text-sm">May 2022 - June 2023</p>
@@ -242,7 +241,7 @@
 
 
 <!-- PROJECT -->
-<div id="projectContent" class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+<div id="projectContent" class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto px-4">
 
   <!-- IT PROJECT -->
   <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg hover:shadow-2xl transition">
@@ -300,7 +299,7 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="max-w-xl w-full fade-up">
+  <div class="max-w-xl w-full px-4 fade-up">
     <h2 class="text-4xl font-bold mb-6 text-center">Get in Touch</h2>
     <form class="flex flex-col gap-4 glass p-6 rounded-xl">
       <input type="text" placeholder="Nama" class="p-4 rounded bg-gray-800">
