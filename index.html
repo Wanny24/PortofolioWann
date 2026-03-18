@@ -1,373 +1,542 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Irwan</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-    html { scroll-snap-type: y mandatory; }
-
-    section {
-      scroll-snap-align: start;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      position: relative;
-    }
-
-    /* subtle bg blobs */
-    .blob { position:absolute; filter: blur(80px); opacity:.25; border-radius:50%; z-index:0 }
-
-    /* animations */
-    .fade-up { opacity:0; transform: translateY(80px); transition: all 1s cubic-bezier(0.22,1,0.36,1);} 
-    .fade-up.show { opacity:1; transform: translateY(0);} 
-
-    /* cursor glow */
-    .cursor-glow { position: fixed; width: 200px; height: 200px; background: radial-gradient(circle, rgba(34,211,238,0.25), transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
-
-    /* parallax tint */
-    .parallax { background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.25), transparent), radial-gradient(circle at 80% 80%, rgba(34,211,238,0.18), transparent); }
-
-    /* glass card */
-    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border:1px solid rgba(255,255,255,0.1);} 
-
-    /* card hover */
-    .card { transition: all .35s ease; }
-    .card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.55);} 
-
-    /* typing */
-    .typing::after { content: '|'; animation: blink 1s infinite; }
-    @keyframes blink {0%,100%{opacity:0}50%{opacity:1}}
-
-    /* nav active */
-    .active { color:#22d3ee }
-
-    /* timeline zigzag */
-    .timeline { position:relative }
-    .timeline::before { content:''; position:absolute; left:50%; top:0; width:2px; height:100%; background: rgba(255,255,255,.1);} 
-    .tl-item { position:relative }
-    .tl-dot { position:absolute; left:50%; transform: translateX(-50%); width:12px; height:12px; background:#22d3ee; border-radius:999px; box-shadow:0 0 15px rgba(34,211,238,.7);} 
-
-    /* modal */
-    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6); backdrop-filter: blur(6px); }
-    .modal.show { display:flex }
-  </style>
+  <title>Irwan Yuandri | Futuristic Portfolio</title>
+  
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
-<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white parallax">
-
-<div class="cursor-glow" id="cursor"></div>
-
-<!-- NAVBAR -->
-<header class="fixed w-full top-0 backdrop-blur z-50">
-  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-    <h1 class="font-bold text-xl">Portofolio Saya</h1>
-    <div class="flex flex-wrap justify-end gap-4 text-xs sm:text-sm" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#project">Project</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</header>
-
-<!-- HERO -->
-<section>
-  <div class="blob w-80 h-80 bg-cyan-500 -top-10 -left-10"></div>
-  <div class="blob w-80 h-80 bg-blue-500 -bottom-10 -right-10"></div>
-
-  <div class="text-center fade-up relative z-10">
-    <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold mb-4">Welcome to my</h1>
-    <h1 class="text-3xl sm:text-5xl md:text-7xl font-extrabold text-cyan-400 typing" id="typing"></h1>
+<body>
+  <!-- Particle Canvas Background -->
+  <canvas id="particleCanvas"></canvas>
+  
+  <!-- Custom Cursor -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  
+  <!-- FUTURISTIC LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen">
+  <!-- Cyber Grid Background -->
+  <div class="loading-grid"></div>
+  
+  <!-- Floating Particles -->
+  <div class="loading-particles" id="loadingParticles"></div>
+  
+  <!-- Holographic Circle -->
+  <div class="hologram-container">
+    <div class="hologram-ring ring-1"></div>
+    <div class="hologram-ring ring-2"></div>
+    <div class="hologram-ring ring-3"></div>
+    <div class="hologram-ring ring-4"></div>
     
-    <div class="flex justify-center gap-6 mt-6 text-2xl">
-      <a href="https://instagram.com" target="_blank" class="hover:text-pink-400">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4zm8.25 1.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
-      </a>
-      <a href="https://linkedin.com" target="_blank" class="hover:text-blue-400">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.94 6.5A2.44 2.44 0 1 1 2.06 6.5 2.44 2.44 0 0 1 6.94 6.5zM2.4 8.98h4.9V22H2.4zM9.34 8.98h4.7v1.78h.07c.65-1.23 2.24-2.52 4.6-2.52 4.92 0 5.83 3.24 5.83 7.45V22h-4.9v-5.73c0-1.37-.02-3.13-1.91-3.13-1.91 0-2.2 1.49-2.2 3.03V22h-4.9z"/></svg>
-      </a>
-      <a href="https://github.com" target="_blank" class="hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.87 10.93c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.54-3.88-1.54-.52-1.3-1.27-1.65-1.27-1.65-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.74 2.68 1.24 3.34.95.1-.74.4-1.24.72-1.52-2.55-.29-5.23-1.27-5.23-5.64 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .97-.31 3.18 1.17a11.02 11.02 0 0 1 5.8 0c2.2-1.48 3.17-1.17 3.17-1.17.63 1.57.24 2.73.12 3.02.73.8 1.18 1.82 1.18 3.07 0 4.38-2.69 5.35-5.25 5.64.41.36.77 1.08.77 2.18v3.23c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
-      </a>
+    <!-- Core Logo/Icon -->
+    <div class="hologram-core">
+      <div class="core-pulse"></div>
+      <div class="core-text">IY</div>
     </div>
-    <p class="mt-6 text-gray-400">Scroll to explore</p>
+    
+    <!-- Orbiting Elements -->
+    <div class="orbit orbit-1">
+      <div class="satellite"></div>
+    </div>
+    <div class="orbit orbit-2">
+      <div class="satellite"></div>
+    </div>
+    <div class="orbit orbit-3">
+      <div class="satellite"></div>
+    </div>
   </div>
-</section>
+  
+  <!-- Loading Bar -->
+  <div class="loading-bar-container">
+    <div class="loading-bar-glow"></div>
+    <div class="loading-bar" id="loadingBar">
+      <div class="loading-bar-progress" id="loadingProgress"></div>
+    </div>
+    <div class="loading-percentage" id="loadingPercentage">0%</div>
+  </div>
+  
+  <!-- Status Text -->
+  <div class="loading-status">
+    <span class="status-glitch" id="loadingStatus">INITIALIZING SYSTEM</span>
+    <span class="status-cursor">_</span>
+  </div>
+  
+  <!-- Binary Rain -->
+  <div class="binary-rain" id="binaryRain"></div>
+  
+  <!-- Scanning Line -->
+  <div class="scanning-line"></div>
+  </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">IY<span class="text-cyan">.</span></a>
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
 
-    <!-- LEFT CONTENT -->
-    <div class="fade-up">
-
-      <h2 class="text-3xl md:text-4xl font-semibold text-gray-300">
-        Hi, I'm
-      </h2>
-
-      <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400 mb-4">
-        Irwan Yuandri
-      </h1>
-
-      <p class="text-gray-400 mb-6">
-        Web Development | Bot Automation | Graphic Designer
-      </p>
-
-      <p class="text-gray-300 leading-relaxed mb-6">
-        Active student at Budi Luhur University majoring in informatics engineering. Very interested in digital marketing strategy and graphic design with 2+ years experience. Proven ability to drive sales and improve business outcomes.
-      </p>
-
-      <!-- HIGHLIGHT STATS -->
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="glass p-4 rounded-xl text-center">
-          <h3 class="text-2xl font-bold text-cyan-400">2+</h3>
-          <p class="text-xs text-gray-400">Years Experience</p>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-up">
+          <span class="glitch-text">WELCOME TO THE FUTURE</span>
         </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <h3 class="text-2xl font-bold text-cyan-400">10+</h3>
-          <p class="text-xs text-gray-400">Projects</p>
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+          <span class="gradient-text">Irwan Yuandri</span>
+        </h1>
+        <div class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+          <div class="typewriter" id="typewriter"></div>
         </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <h3 class="text-2xl font-bold text-cyan-400">5+</h3>
-          <p class="text-xs text-gray-400">Clients</p>
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
+          Crafting digital experiences with code & creativity
+        </p>
+        <div class="hero-cta" data-aos="fade-up" data-aos-delay="800">
+          <a href="#contact" class="btn btn-primary">
+            <span>Start Project</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="#about" class="btn btn-outline">
+            <span>Explore</span>
+            <i class="fas fa-chevron-down"></i>
+          </a>
+        </div>
+        <div class="hero-social" data-aos="fade-up" data-aos-delay="1000">
+          <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
-
-      <!-- SKILLS -->
-      <div class="grid grid-cols-2 gap-4 text-sm">
-        <div class="glass p-4 rounded-xl card">
-          <h4 class="font-semibold mb-2 text-cyan-400">Professional</h4>
-          <ul class="text-gray-400 space-y-1">
-            <li>• E-commerce</li>
-            <li>• Advertising</li>
-            <li>• Graphic Design</li>
-            <li>• Copywriting</li>
-          </ul>
-        </div>
-
-        <div class="glass p-4 rounded-xl card">
-          <h4 class="font-semibold mb-2 text-cyan-400">Soft Skills</h4>
-          <ul class="text-gray-400 space-y-1">
-            <li>• Creative</li>
-            <li>• Analytical</li>
-            <li>• Problem Solving</li>
-            <li>• Time Management</li>
-          </ul>
+      <div class="hero-scroll" data-aos="fade-up">
+        <div class="scroll-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- RIGHT CONTENT -->
-    <div class="fade-up flex justify-center">
-      <div class="relative">
-
-        <!-- glow background -->
-        <div class="absolute -inset-4 bg-cyan-500 opacity-20 blur-2xl rounded-2xl"></div>
-
-        <!-- main card -->
-        <div class="glass p-6 rounded-2xl card relative">
-          <img src="https://i.pravatar.cc/300?img=12"
-             class="rounded-2xl w-56 sm:w-64 md:w-72 h-[320px] md:h-[420px] object-cover">
-
-          <!-- floating badge -->
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">INTRODUCTION</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-image" data-aos="fade-right">
+          <div class="image-frame">
+            <div class="image-glitch">
+              <img src="https://i.pravatar.cc/500?img=12" alt="Profile">
+            </div>
+            <div class="frame-corners"></div>
+          </div>
+          <div class="image-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="yearsExp">0</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="projectsDone">0</span>
+              <span class="stat-label">Projects Done</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="clientsServed">0</span>
+              <span class="stat-label">Clients</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-text" data-aos="fade-left">
+          <h3>Creative <span class="gradient-text">Developer</span> & Designer</h3>
+          <p>
+            Active student at Budi Luhur University majoring in informatics engineering. 
+            Passionate about creating futuristic digital experiences with 2+ years of experience 
+            in web development and graphic design.
+          </p>
           
+          <div class="skills-container">
+            <div class="skill-category">
+              <h4>Development</h4>
+              <div class="skill-bars">
+                <div class="skill-bar" data-percent="90">
+                  <span class="skill-name">HTML/CSS</span>
+                  <div class="skill-progress">
+                    <div class="progress-fill"></div>
+                  </div>
+                </div>
+                <div class="skill-bar" data-percent="85">
+                  <span class="skill-name">JavaScript</span>
+                  <div class="skill-progress">
+                    <div class="progress-fill"></div>
+                  </div>
+                </div>
+                <div class="skill-bar" data-percent="75">
+                  <span class="skill-name">React</span>
+                  <div class="skill-progress">
+                    <div class="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="skill-category">
+              <h4>Design</h4>
+              <div class="skill-tags">
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">Illustrator</span>
+                <span class="skill-tag">After Effects</span>
+                <span class="skill-tag">Blender</span>
+              </div>
+            </div>
+          </div>
+          
+          <a href="#contact" class="btn btn-primary">
+            <span>Download CV</span>
+            <i class="fas fa-download"></i>
+          </a>
         </div>
-
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- FIX spacing bug -->
-<div class="h-20"></div>
-
-<section id="experience">
-  <div class="max-w-5xl w-full timeline">
-    <h2 class="text-4xl font-bold mb-12 text-center fade-up">Work Experience</h2>
-
-    <div class="space-y-16">
-
-      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
-        <div class="md:pr-12 md:text-right">
-          <h3 class="font-bold">PT. Galaxy Digital Niaga</h3>
-          <p class="text-gray-400 text-sm">Feb 2024 - Now</p>
-          <p class="text-gray-300 mt-2">Designer Grafis & Video Editor — content scheduling, video production, marketplace assets.</p>
+  <!-- Experience Section - REVISED -->
+<section id="experience" class="experience">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">JOURNEY</span>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    
+    <!-- 3D Cards Experience -->
+    <div class="experience-cards" data-aos="fade-up">
+      
+      <!-- Card 1 - Galaxy Digital Niaga -->
+      <div class="exp-card glass-card" onclick="openExpModal('galaxy')">
+        <div class="exp-card-inner">
+          <div class="exp-front">
+            <div class="exp-icon">
+              <i class="fas fa-video"></i>
+            </div>
+            <h3>PT. Galaxy Digital Niaga</h3>
+            <p class="exp-position">Designer Grafis & Video Editor</p>
+            <div class="exp-date">
+              <i class="far fa-calendar-alt"></i>
+              <span>Feb 2024 - Now</span>
+            </div>
+            <div class="exp-preview">
+              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+            </div>
+          </div>
         </div>
-        <div onclick="openModal(
-          'PT. Galaxy Digital Niaga',
-          'Sebagai Designer Grafis & Video Editor, saya bertanggung jawab membuat konten visual, mengatur jadwal posting, serta meningkatkan engagement marketplace melalui strategi visual yang konsisten.'
-        )"
-        class="glass p-6 rounded-xl card cursor-pointer">
-          Key impact: improved content consistency & engagement.
-        </div>
+        <div class="exp-glow"></div>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
-        <div onclick="openModal(
-          'Wijaya Group',
-          'Mengelola campaign digital marketing, membuat konsep konten, serta berkolaborasi dengan tim untuk meningkatkan awareness dan interaksi audience.'
-        )"
-        class="glass p-6 rounded-xl card cursor-pointer">
-          Managed paid ads & community interactions.
+      
+      <!-- Card 2 - Wijaya Group -->
+      <div class="exp-card glass-card" onclick="openExpModal('wijaya')">
+        <div class="exp-card-inner">
+          <div class="exp-front">
+            <div class="exp-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Wijaya Group</h3>
+            <p class="exp-position">Social Media Marketing</p>
+            <div class="exp-date">
+              <i class="far fa-calendar-alt"></i>
+              <span>July 2023 - Feb 2024</span>
+            </div>
+            <div class="exp-preview">
+              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+            </div>
+          </div>
+        </div>
+        <div class="exp-glow"></div>
+      </div>
+      
+      <!-- Card 3 - Beanbagkit -->
+      <div class="exp-card glass-card" onclick="openExpModal('beanbag')">
+        <div class="exp-card-inner">
+          <div class="exp-front">
+            <div class="exp-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Beanbagkit</h3>
+            <p class="exp-position">Designer & E-commerce Staff</p>
+            <div class="exp-date">
+              <i class="far fa-calendar-alt"></i>
+              <span>May 2022 - June 2023</span>
+            </div>
+            <div class="exp-preview">
+              <p>Click to see details <i class="fas fa-arrow-right"></i></p>
+            </div>
+          </div>
+        </div>
+        <div class="exp-glow"></div>
+      </div>
+      
+    </div>
+    
+    <!-- Timeline Experience (Alternative View) -->
+    <div class="experience-timeline" data-aos="fade-up">
+      <h3 class="timeline-title">Career Path</h3>
+      
+      <div class="timeline-container">
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item-exp" onclick="openExpModal('galaxy')">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content-exp glass-card">
+            <div class="timeline-date-badge">2024 - Present</div>
+            <h4>PT. Galaxy Digital Niaga</h4>
+            <p class="timeline-role">Designer Grafis & Video Editor</p>
+            <div class="timeline-hover">
+              <span>Click for details</span>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
         </div>
         
-        <div class="md:pl-12">
-          <h3 class="font-bold">Wijaya Group</h3>
-          <p class="text-gray-400 text-sm">July 2023 - Feb 2024</p>
-          <p class="text-gray-300 mt-2">Social Media Marketing — campaigns, concepts, collaborations.</p>
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item-exp" onclick="openExpModal('wijaya')">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content-exp glass-card">
+            <div class="timeline-date-badge">2023 - 2024</div>
+            <h4>Wijaya Group</h4>
+            <p class="timeline-role">Social Media Marketing</p>
+            <div class="timeline-hover">
+              <span>Click for details</span>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
         </div>
         
-        <div class="tl-dot" style="top: 10px"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10 tl-item fade-up">
-        <div class="md:pr-12 md:text-right">
-          <h3 class="font-bold">Beanbagkit</h3>
-          <p class="text-gray-400 text-sm">May 2022 - June 2023</p>
-          <p class="text-gray-300 mt-2">Designer & E-commerce Staff — product visuals, listings, operations.</p>
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item-exp" onclick="openExpModal('beanbag')">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content-exp glass-card">
+            <div class="timeline-date-badge">2022 - 2023</div>
+            <h4>Beanbagkit</h4>
+            <p class="timeline-role">Designer & E-commerce Staff</p>
+            <div class="timeline-hover">
+              <span>Click for details</span>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
         </div>
-        <div onclick="openModal(
-          'Beanbagjkt',
-          'Mengelola campaign digital marketing, membuat konsep konten, serta berkolaborasi dengan tim untuk meningkatkan awareness dan interaksi audience.'
-        )"
-        class="glass p-6 rounded-xl card cursor-pointer">
-          Handled Shopee/Tokopedia/TikTok Shop operations
-        </div>
-        <div class="tl-dot" style="top: 10px"></div>
       </div>
-
     </div>
-  </div>
-</section>
-
-
-<section id="project">
-
-  <div class="max-w-5xl mx-auto w-full">
-
-    <!-- TITLE -->
-    <h2 class="text-4xl font-bold text-center mb-6">Projects</h2>
-
-    <!-- TOGGLE BUTTON -->
-    <div class="flex justify-center gap-4 mb-10">
-      <button onclick="showProject()" id="btnProject"
-        class="px-5 py-2 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">
-        Project
+    
+    <!-- View Toggle -->
+    <div class="exp-view-toggle" data-aos="fade-up">
+      <button class="view-btn active" onclick="toggleExpView('cards')">
+        <i class="fas fa-th-large"></i> Cards
       </button>
-
-      <button onclick="showCert()" id="btnCert"
-        class="px-5 py-2 rounded-full border border-white/20 hover:border-cyan-400 transition">
-        Certificate
+      <button class="view-btn" onclick="toggleExpView('timeline')">
+        <i class="fas fa-stream"></i> Timeline
       </button>
     </div>
-
-    <!-- PROJECT -->
-    <div id="projectContent" class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
-
-      <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg">
-
-      <!-- IMAGE -->
-      <img src="https://picsum.photos/800/600?tech"
-          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-
-      <!-- OVERLAY -->
-      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-      <!-- TEXT -->
-      <div class="absolute bottom-0 left-0 p-5 translate-y-10 opacity-0 
-                  group-hover:translate-y-0 group-hover:opacity-100 
-                  transition duration-500">
-        <p class="text-white text-lg font-semibold">IT Projects</p>
-        <p class="text-gray-300 text-sm">Web, Automation, Backend</p>
-      </div>
-
-    </div>
-
-          <div class="relative group rounded-2xl overflow-hidden h-64 border border-white/10 shadow-lg">
-
-      <!-- IMAGE -->
-      <img src="https://picsum.photos/800/700?tech"
-          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-
-      <!-- OVERLAY -->
-      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-      <!-- TEXT -->
-      <div class="absolute bottom-0 left-0 p-5 translate-y-10 opacity-0 
-                  group-hover:translate-y-0 group-hover:opacity-100 
-                  transition duration-500">
-        <p class="text-white text-lg font-semibold">Design</p>
-        <p class="text-gray-300 text-sm">Design, Graphic, Illustration</p>
-      </div>
-
-    </div>  
-
-    <!-- CERT -->
-    <div id="certContent" class="hidden overflow-x-auto px-4">
-      <div class="flex gap-6 animate-slide">
-        <img src="https://picsum.photos/300/200?1" class="rounded-xl">
-        <img src="https://picsum.photos/300/200?2" class="rounded-xl">
-        <img src="https://picsum.photos/300/200?3" class="rounded-xl">
-        <img src="https://picsum.photos/300/200?4" class="rounded-xl">
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="max-w-xl w-full px-4 fade-up">
-    <h2 class="text-4xl font-bold mb-6 text-center">Get in Touch</h2>
-    <form class="flex flex-col gap-4 glass p-6 rounded-xl">
-      <input type="text" placeholder="Nama" class="p-4 rounded bg-gray-800">
-      <input type="email" placeholder="Email" class="p-4 rounded bg-gray-800">
-      <textarea placeholder="Pesan" class="p-4 rounded bg-gray-800"></textarea>
-      <button class="bg-cyan-500 p-4 rounded-xl hover:scale-105 transition">Send</button>
-    </form>
+    
   </div>
 </section>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="glass p-6 rounded-xl max-w-md w-full">
-    <h3 id="modalTitle" class="text-xl font-bold mb-2"></h3>
-    <p id="modalDesc" class="text-gray-300"></p>
-    <button onclick="closeModal()" class="mt-4 bg-cyan-500 px-4 py-2 rounded">Close</button>
+<!-- MODAL POPUP for Experience Details -->
+<div id="expModal" class="exp-modal">
+  <div class="exp-modal-content glass-card">
+    <button class="exp-modal-close" onclick="closeExpModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="exp-modal-header">
+      <div class="exp-modal-icon" id="modalIcon">
+        <i class="fas fa-briefcase"></i>
+      </div>
+      <h2 id="modalCompany">PT. Galaxy Digital Niaga</h2>
+      <p class="exp-modal-period" id="modalPeriod">Feb 2024 - Now</p>
+    </div>
+    
+    <div class="exp-modal-body">
+      <div class="exp-modal-section">
+        <h3><i class="fas fa-clipboard-list"></i> Job Description</h3>
+        <ul id="modalJobdesc">
+          <!-- Will be filled by JavaScript -->
+        </ul>
+      </div>
+      
+      <div class="exp-modal-section">
+        <h3><i class="fas fa-star"></i> Achievements</h3>
+        <ul id="modalAchievements">
+          <!-- Will be filled by JavaScript -->
+        </ul>
+      </div>
+      
+      <div class="exp-modal-section">
+        <h3><i class="fas fa-tools"></i> Skills Used</h3>
+        <div class="modal-tags" id="modalSkills">
+          <!-- Will be filled by JavaScript -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="exp-modal-footer">
+      <button class="btn btn-primary" onclick="closeExpModal()">
+        <span>Close</span>
+      </button>
+    </div>
   </div>
 </div>
 
-<script>
-// fade
-const elements = document.querySelectorAll('.fade-up');
-const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); });
-elements.forEach(el => observer.observe(el));
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">PORTFOLIO</span>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="projects-filter" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Dev</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+        <button class="filter-btn" data-filter="video">Video</button>
+      </div>
+      
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Projects will be loaded via JavaScript -->
+      </div>
+      
+      <div class="projects-more" data-aos="fade-up">
+        <button class="btn btn-outline" id="loadMoreBtn">
+          <span>Load More</span>
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+    </div>
+  </section>
 
-// cursor glow
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; });
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">CONNECT</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="contact-content">
+        <div class="contact-info" data-aos="fade-right">
+          <div class="info-card glass-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Location</h3>
+            <p>Jakarta, Indonesia</p>
+          </div>
+          
+          <div class="info-card glass-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>irwan.yuandri@email.com</p>
+          </div>
+          
+          <div class="info-card glass-card">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Phone</h3>
+            <p>+62 812 3456 7890</p>
+          </div>
+        </div>
+        
+        <form class="contact-form glass-card" id="contactForm" data-aos="fade-left">
+          <div class="form-group">
+            <input type="text" id="name" placeholder=" " required>
+            <label for="name">Your Name</label>
+          </div>
+          
+          <div class="form-group">
+            <input type="email" id="email" placeholder=" " required>
+            <label for="email">Your Email</label>
+          </div>
+          
+          <div class="form-group">
+            <input type="text" id="subject" placeholder=" " required>
+            <label for="subject">Subject</label>
+          </div>
+          
+          <div class="form-group">
+            <textarea id="message" rows="5" placeholder=" " required></textarea>
+            <label for="message">Your Message</label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span>Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-// typing
-const text = 'Portfolio Website'; let i=0; function typing(){ if(i<text.length){ document.getElementById('typing').innerHTML += text.charAt(i); i++; setTimeout(typing,60);} } typing();
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Irwan Yuandri</h3>
+          <p>Creating future-proof digital experiences</p>
+        </div>
+        
+        <div class="footer-social">
+          <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Irwan Yuandri. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-// active nav
-const sections = document.querySelectorAll('section'); const navLinks = document.querySelectorAll('#navLinks a');
-window.addEventListener('scroll', () => { let current=''; sections.forEach(sec => { const top=window.scrollY; const offset=sec.offsetTop-200; const height=sec.offsetHeight; if(top>=offset && top<offset+height){ current=sec.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === '#'+current){ link.classList.add('active'); } }); });
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-// modal
-function openModal(title, desc){ document.getElementById('modal').classList.add('show'); document.getElementById('modalTitle').innerText=title; document.getElementById('modalDesc').innerText=desc; }
-function closeModal(){ document.getElementById('modal').classList.remove('show'); }
-</script>
-
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
