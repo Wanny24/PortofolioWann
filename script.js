@@ -509,7 +509,7 @@ function initCounters() {
     if (!yearsExp || !projectsDone || !clientsServed) return;
     
     const counters = [
-        { element: yearsExp, target: 2, duration: 2000 },
+        { element: yearsExp, target: 4, duration: 2000 },
         { element: projectsDone, target: 15, duration: 2000 },
         { element: clientsServed, target: 8, duration: 2000 }
     ];
@@ -743,13 +743,13 @@ document.querySelectorAll('.exp-card').forEach(card => {
   });
 });
 
-// ===== PROJECTS =====
+// ===== PROJECTS - AUTO SLIDE =====
 function initProjects() {
-    const projectsGrid = document.getElementById('projectsGrid');
+    const projectsSliderWrapper = document.getElementById('projectsSliderWrapper');
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const sliderContainer = document.getElementById('projectsSliderContainer');
     
-    if (!projectsGrid) return;
+    if (!projectsSliderWrapper) return;
     
     const projects = [
         {
@@ -793,20 +793,34 @@ function initProjects() {
             description: 'Collection of futuristic motion graphics',
             image: 'https://picsum.photos/800/600?6',
             link: '#'
+        },
+        {
+            category: 'web',
+            title: 'Portfolio Website',
+            description: 'Personal portfolio with futuristic design',
+            image: 'https://picsum.photos/800/600?7',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: '3D Product Mockups',
+            description: 'Photorealistic product presentations',
+            image: 'https://picsum.photos/800/600?8',
+            link: '#'
         }
     ];
     
     let currentFilter = 'all';
-    let visibleProjects = 3;
     
     function displayProjects() {
         const filtered = currentFilter === 'all' 
             ? projects 
             : projects.filter(p => p.category === currentFilter);
         
-        const toShow = filtered.slice(0, visibleProjects);
+        // Double the projects for seamless loop
+        const doubledProjects = [...filtered, ...filtered];
         
-        projectsGrid.innerHTML = toShow.map(project => `
+        projectsSliderWrapper.innerHTML = doubledProjects.map(project => `
             <div class="project-card" data-category="${project.category}">
                 <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
                 <div class="project-overlay">
@@ -820,8 +834,20 @@ function initProjects() {
             </div>
         `).join('');
         
-        if (loadMoreBtn) {
-            loadMoreBtn.style.display = filtered.length > visibleProjects ? 'inline-flex' : 'none';
+        // Reset animation after filter change
+        const wrapper = projectsSliderWrapper;
+        wrapper.style.animation = 'none';
+        wrapper.offsetHeight; // Trigger reflow
+        wrapper.style.animation = 'slideAnimation 40s linear infinite';
+        
+        // Adjust animation duration based on number of items
+        const itemCount = filtered.length;
+        if (itemCount <= 3) {
+            wrapper.style.animationDuration = '30s';
+        } else if (itemCount <= 5) {
+            wrapper.style.animationDuration = '40s';
+        } else {
+            wrapper.style.animationDuration = '50s';
         }
     }
     
@@ -831,16 +857,61 @@ function initProjects() {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
-                visibleProjects = 3;
                 displayProjects();
             });
         });
     }
     
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            visibleProjects += 3;
-            displayProjects();
+    // DRAG TO SLIDE functionality (for manual control)
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+    
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            sliderContainer.classList.add('dragging');
+            startX = e.pageX - sliderContainer.offsetLeft;
+            scrollLeft = sliderContainer.scrollLeft;
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+            sliderContainer.classList.remove('dragging');
+        });
+        
+        sliderContainer.addEventListener('mouseup', () => {
+            isDragging = false;
+            sliderContainer.classList.remove('dragging');
+        });
+        
+        sliderContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - sliderContainer.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed
+            sliderContainer.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Touch events for mobile
+        sliderContainer.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            sliderContainer.classList.add('dragging');
+            startX = e.touches[0].pageX - sliderContainer.offsetLeft;
+            scrollLeft = sliderContainer.scrollLeft;
+        });
+        
+        sliderContainer.addEventListener('touchend', () => {
+            isDragging = false;
+            sliderContainer.classList.remove('dragging');
+        });
+        
+        sliderContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - sliderContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            sliderContainer.scrollLeft = scrollLeft - walk;
         });
     }
     

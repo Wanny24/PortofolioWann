@@ -236,36 +236,58 @@
           <div class="skills-container">
             <div class="skill-category">
               <h4>Development</h4>
-              <div class="skill-bars">
-                <div class="skill-bar" data-percent="90">
-                  <span class="skill-name">HTML/CSS</span>
-                  <div class="skill-progress">
-                    <div class="progress-fill"></div>
-                  </div>
+              <div class="skill-icons">
+                <div class="skill-icon-item" data-tooltip="HTML5">
+                  <i class="fab fa-html5"></i>
                 </div>
-                <div class="skill-bar" data-percent="85">
-                  <span class="skill-name">JavaScript</span>
-                  <div class="skill-progress">
-                    <div class="progress-fill"></div>
-                  </div>
+                <div class="skill-icon-item" data-tooltip="CSS3 & Tailwind">
+                  <i class="fab fa-css3-alt"></i>
                 </div>
-                <div class="skill-bar" data-percent="75">
-                  <span class="skill-name">React</span>
-                  <div class="skill-progress">
-                    <div class="progress-fill"></div>
-                  </div>
+                <div class="skill-icon-item" data-tooltip="JavaScript">
+                  <i class="fab fa-js"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Laravel">
+                  <i class="fab fa-laravel"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Python">
+                  <i class="fab fa-python"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Kotlin">
+                  <i class="fab fa-android"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="MySQL">
+                  <i class="fas fa-database"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="PHP">
+                  <i class="fab fa-php"></i>
                 </div>
               </div>
             </div>
             
             <div class="skill-category">
               <h4>Design</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Figma</span>
-                <span class="skill-tag">Photoshop</span>
-                <span class="skill-tag">Illustrator</span>
-                <span class="skill-tag">After Effects</span>
-                <span class="skill-tag">Blender</span>
+              <div class="skill-icons">
+                <div class="skill-icon-item" data-tooltip="Figma">
+                  <i class="fab fa-figma"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Photoshop">
+                  <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Illustrator">
+                  <i class="fas fa-pen-fancy"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Premiere Pro">
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="After Effects">
+                  <i class="fas fa-film"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="Canva">
+                  <i class="fas fa-paint-bucket"></i>
+                </div>
+                <div class="skill-icon-item" data-tooltip="CapCut">
+                  <i class="fas fa-cut"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -467,34 +489,37 @@
     </div>
   </div>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-subtitle">PORTFOLIO</span>
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="section-line"></div>
-      </div>
-      
-      <div class="projects-filter" data-aos="fade-up">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="web">Web Dev</button>
-        <button class="filter-btn" data-filter="design">Design</button>
-        <button class="filter-btn" data-filter="video">Video</button>
-      </div>
-      
-      <div class="projects-grid" id="projectsGrid">
-        <!-- Projects will be loaded via JavaScript -->
-      </div>
-      
-      <div class="projects-more" data-aos="fade-up">
-        <button class="btn btn-outline" id="loadMoreBtn">
-          <span>Load More</span>
-          <i class="fas fa-sync-alt"></i>
-        </button>
+  <!-- Projects Section - Auto Slide -->
+<section id="projects" class="projects">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">PORTFOLIO</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    
+    <div class="projects-filter" data-aos="fade-up">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Dev</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+      <button class="filter-btn" data-filter="video">Video</button>
+    </div>
+    
+    <!-- Auto Slide Container -->
+    <div class="projects-slider-container" id="projectsSliderContainer" data-aos="fade-up">
+      <div class="projects-slider-wrapper" id="projectsSliderWrapper">
+        <!-- Projects will be loaded via JavaScript (doubled for seamless loop) -->
       </div>
     </div>
-  </section>
+    
+    <!-- Slide Hint -->
+    <div class="slide-hint">
+      <i class="fas fa-chevron-left"></i>
+      <span>Slide to explore</span>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact">
