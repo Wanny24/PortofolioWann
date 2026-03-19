@@ -432,7 +432,7 @@ function initTypewriter() {
     const typewriter = document.getElementById('typewriter');
     if (!typewriter) return;
     
-    const words = ['Web Developer', 'UI/UX Designer', 'Creative Technologist', 'Problem Solver'];
+    const words = ['Web Developer', 'UI/UX Designer', 'Creative Technologist', 'Problem Solver', 'Designer Graphic', 'Bot Automation'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
