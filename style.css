@@ -845,17 +845,15 @@ a:hover {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #030014, #0f0520, #1a0b2e, #0f0520, #030014);
+  background: linear-gradient(135deg, #030014, #0f0520, #1a0b2e);
   background-size: 400% 400%;
   animation: heroGradient 15s ease infinite;
-  padding-top: 100px;
+  padding-top: 80px;
 }
 
 @keyframes heroGradient {
   0%, 100% { background-position: 0% 0%; }
-  25% { background-position: 100% 0%; }
   50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
 }
 
 .hero::before {
@@ -865,8 +863,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 30% 50%, rgba(108, 92, 231, 0.15), transparent 50%),
-              radial-gradient(circle at 70% 50%, rgba(164, 99, 245, 0.15), transparent 50%);
+  background: radial-gradient(circle at 30% 50%, rgba(108, 92, 231, 0.15), transparent 50%);
   pointer-events: none;
 }
 
@@ -888,24 +885,15 @@ a:hover {
   z-index: 2;
 }
 
-.hero-content {
-  width: 100%;
-}
-
 .hero-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
-  margin-top: 30px;
-}
-
-.hero-text-content {
-  max-width: 600px;
 }
 
 .hero-badge {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .glitch-text {
@@ -913,8 +901,6 @@ a:hover {
   letter-spacing: 4px;
   color: var(--accent-3);
   text-transform: uppercase;
-  position: relative;
-  display: inline-block;
   animation: glitch 3s infinite;
   text-shadow: 0 0 10px var(--accent-3);
 }
@@ -932,18 +918,16 @@ a:hover {
 }
 
 .hero-title {
-  font-size: clamp(40px, 8vw, 80px);
+  font-size: clamp(36px, 6vw, 64px);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 20px;
-  color: var(--text-primary);
+  margin-bottom: 15px;
 }
 
 .hero-subtitle {
-  font-size: clamp(20px, 4vw, 32px);
-  margin-bottom: 20px;
-  height: 60px;
-  color: var(--text-secondary);
+  font-size: clamp(18px, 3vw, 28px);
+  margin-bottom: 15px;
+  min-height: 50px;
 }
 
 .typewriter {
@@ -952,40 +936,41 @@ a:hover {
   overflow: hidden;
   display: inline-block;
   animation: blink 0.75s step-end infinite;
-  color: var(--text-secondary);
 }
 
 @keyframes blink {
-  from, to { border-color: transparent; }
-  50% { border-color: var(--accent-3); }
+  50% { border-color: transparent; }
 }
 
 .hero-description {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-muted);
-  margin-bottom: 40px;
-  max-width: 600px;
+  margin-bottom: 30px;
+  max-width: 500px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .hero-cta {
   display: flex;
-  gap: 20px;
-  margin-bottom: 50px;
+  gap: 15px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 12px 30px;
+  padding: 10px 25px;
   border: none;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: var(--transition);
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   position: relative;
   overflow: hidden;
 }
@@ -1015,7 +1000,7 @@ a:hover {
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 40px rgba(164, 99, 245, 0.5);
+  box-shadow: 0 0 30px rgba(164, 99, 245, 0.5);
   transform: translateY(-2px);
 }
 
@@ -1028,29 +1013,27 @@ a:hover {
 .btn-outline:hover {
   background: var(--accent-3);
   color: var(--bg-darker);
-  transform: translateY(-2px);
 }
 
 .hero-social {
   display: flex;
-  gap: 20px;
+  gap: 15px;
 }
 
 .social-link {
   color: var(--text-secondary);
-  font-size: 20px;
+  font-size: 18px;
   transition: var(--transition);
 }
 
 .social-link:hover {
   color: var(--accent-3);
   transform: translateY(-3px);
-  text-shadow: 0 0 10px var(--accent-3);
 }
 
 .hero-scroll {
   position: absolute;
-  bottom: 50px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1064,27 +1047,17 @@ a:hover {
 }
 
 .scroll-indicator span {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background: var(--accent-3);
   border-radius: 50%;
   opacity: 0.5;
-}
-
-.scroll-indicator span:nth-child(2) {
-  animation: scrollPulse 1.5s infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.5); }
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
 }
-
 /* ===== ANIMATED COMPUTER ===== */
 .hero-animation {
   position: relative;
