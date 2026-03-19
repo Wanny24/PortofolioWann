@@ -813,28 +813,20 @@ a:hover {
 
 /* ===== SMALL MOBILE (max-width: 480px) ===== */
 @media (max-width: 480px) {
-  .nav-container {
-    padding: 0 15px;
+  .hero-title {
+    font-size: 28px;
   }
-  
-  .nav-logo {
-    font-size: 20px;
-  }
-  
-  .theme-toggle,
-  .menu-toggle {
-    width: 34px;
-    height: 34px;
+
+  .hero-subtitle {
     font-size: 16px;
   }
-  
-  .nav-menu {
-    padding: 25px 15px;
-    gap: 15px;
+
+  .animation-container {
+    transform: scale(0.55);
   }
-  
-  .nav-link {
-    font-size: 15px;
+
+  .hero-description {
+    font-size: 13px;
   }
 }
 
@@ -949,10 +941,13 @@ a:hover {
 .typewriter {
   border-right: 3px solid var(--accent-3);
   white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  animation: blink 0.75s step-end infinite;
-  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .typewriter {
+    white-space: normal;   /* ⬅️ ini kuncinya */
+    border-right: none;
+  }
 }
 
 @keyframes blink {
@@ -2217,58 +2212,65 @@ a:hover {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .project-card {
-    width: 300px;
-    height: 200px;
+  .hero {
+    padding-top: 90px;
+    padding-bottom: 40px;
+    text-align: center;
   }
-  
-  .projects-slider-wrapper {
-    animation-duration: 30s; /* Faster on mobile */
-  }
-}
 
-@media (max-width: 576px) {
-  .project-card {
-    width: 280px;
-    height: 180px;
+  .hero-main {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
-  
-  .project-overlay {
-    padding: 20px;
+
+  .hero-text-content {
+    order: 2;
   }
-  
-  .project-title {
+
+  .hero-animation {
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
     font-size: 18px;
+    height: auto;
+    min-height: 30px;
   }
-  
-  .project-description {
-    font-size: 12px;
-  }
-  
-  .projects-slider-wrapper {
-    animation-duration: 25s; /* Even faster on small mobile */
-  }
-}
 
-@media (max-width: 480px) {
-  .project-card {
-    width: 250px;
-    height: 160px;
+  .typewriter {
+    white-space: normal; /* FIX TEXT KEPOTONG */
+    border-right: none;
   }
-  
-  .projects-slider-wrapper {
-    animation-duration: 20s;
-  }
-}
 
-@media (max-width: 360px) {
-  .project-card {
-    width: 220px;
-    height: 140px;
+  .hero-description {
+    font-size: 14px;
+    padding: 0 10px;
   }
-  
-  .slide-hint {
-    font-size: 12px;
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 220px;
+    justify-content: center;
+  }
+
+  .hero-social {
+    justify-content: center;
+  }
+
+  /* KECILIN ANIMASI KOMPUTER */
+  .animation-container {
+    transform: scale(0.65);
   }
 }
 
