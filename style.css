@@ -809,7 +809,39 @@ a:hover {
   .menu-toggle {
     display: flex;
   }
+
+  .hero-badge {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .glitch-text {
+    font-size: 11px !important;
+    letter-spacing: 2px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    display: inline-block !important;
+    max-width: 100% !important;
+    padding: 0 5px !important;
+    line-height: 1.4 !important;
+  }
 }
+
+@media (max-width: 576px) {
+  .glitch-text {
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .glitch-text {
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+  }
+}
+
+  
 
 /* ===== SMALL MOBILE (max-width: 480px) ===== */
 @media (max-width: 480px) {
@@ -837,6 +869,8 @@ a:hover {
     font-size: 15px;
   }
 }
+
+
 
 /* ===== HERO SECTION ===== */
 .hero {
