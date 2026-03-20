@@ -767,13 +767,6 @@ function initProjects() {
             link: '#'
         },
         {
-            category: 'video',
-            title: 'Product Animation Reel',
-            description: '3D product animation with cinematic effects',
-            image: 'https://picsum.photos/800/600?3',
-            link: '#'
-        },
-        {
             category: 'web',
             title: 'E-commerce Platform',
             description: 'Modern e-commerce with AR product preview',
@@ -785,13 +778,6 @@ function initProjects() {
             title: 'Mobile App UI',
             description: 'Futuristic mobile app interface design',
             image: 'https://picsum.photos/800/600?5',
-            link: '#'
-        },
-        {
-            category: 'video',
-            title: 'Motion Graphics Pack',
-            description: 'Collection of futuristic motion graphics',
-            image: 'https://picsum.photos/800/600?6',
             link: '#'
         },
         {
@@ -807,6 +793,119 @@ function initProjects() {
             description: 'Photorealistic product presentations',
             image: 'https://picsum.photos/800/600?8',
             link: '#'
+        },
+        // Added YouTube video projects
+        {
+            category: 'video',
+            title: '5 Rekomendasi Drone DJI Pemula 2025',
+            description: 'Review dan rekomendasi drone DJI terbaik untuk pemula di tahun 2025',
+            image: 'https://img.youtube.com/vi/4XvvYWIQuvs/maxresdefault.jpg',
+            link: 'https://youtu.be/4XvvYWIQuvs'
+        },
+        {
+            category: 'video',
+            title: 'Canon EOS R100 vs R50 Perbandingan',
+            description: '7 perbandingan utama antara Canon EOS R100 & Canon EOS R50, mana yang lebih worth it?',
+            image: 'https://img.youtube.com/vi/N6sdkTQsQNA/maxresdefault.jpg',
+            link: 'https://youtu.be/N6sdkTQsQNA'
+        },
+        {
+            category: 'video',
+            title: 'Rekomendasi Drone DJI Pemula',
+            description: 'Video review drone DJI untuk pemula',
+            image: 'https://img.youtube.com/vi/cv6qCxO2k4w/maxresdefault.jpg',
+            link: 'https://youtu.be/cv6qCxO2k4w'
+        },
+        {
+            category: 'video',
+            title: 'Tips Fotografi dengan Drone',
+            description: 'Tips dan trik fotografi menggunakan drone untuk pemula',
+            image: 'https://img.youtube.com/vi/EMyPysLqvUs/maxresdefault.jpg',
+            link: 'https://youtu.be/EMyPysLqvUs'
+        },
+        {
+            category: 'video',
+            title: 'Review Kamera Mirrorless',
+            description: 'Review lengkap kamera mirrorless untuk content creator',
+            image: 'https://img.youtube.com/vi/cXuw_dljE-I/maxresdefault.jpg',
+            link: 'https://youtu.be/cXuw_dljE-I'
+        },
+        {
+            category: 'video',
+            title: 'Tutorial Editing Video',
+            description: 'Tutorial editing video untuk pemula menggunakan software gratis',
+            image: 'https://img.youtube.com/vi/EG-jmQ36A6o/maxresdefault.jpg',
+            link: 'https://youtu.be/EG-jmQ36A6o'
+        },
+        {
+            category: 'video',
+            title: 'Tips Cinematic dengan Smartphone',
+            description: 'Cara membuat video cinematic hanya dengan smartphone',
+            image: 'https://img.youtube.com/vi/iXfu7qWlduo/maxresdefault.jpg',
+            link: 'https://youtu.be/iXfu7qWlduo'
+        },
+        {
+            category: 'video',
+            title: 'Review Lensa Terbaik',
+            description: 'Rekomendasi lensa terbaik untuk berbagai kebutuhan fotografi',
+            image: 'https://img.youtube.com/vi/_t6mbPBlmvw/maxresdefault.jpg',
+            link: 'https://youtu.be/_t6mbPBlmvw'
+        },
+        {
+            category: 'video',
+            title: 'Tips Lighting untuk Video',
+            description: 'Tips lighting sederhana untuk hasil video profesional',
+            image: 'https://img.youtube.com/vi/U40ANiDEoK4/maxresdefault.jpg',
+            link: 'https://youtu.be/U40ANiDEoK4'
+        },
+        {
+            category: 'video',
+            title: 'Review Gimbal Stabilizer',
+            description: 'Review gimbal stabilizer terbaik untuk smartphone dan kamera',
+            image: 'https://img.youtube.com/vi/Sk9j9vtNYic/maxresdefault.jpg',
+            link: 'https://youtu.be/Sk9j9vtNYic'
+        },
+        {
+            category: 'video',
+            title: 'Tutorial Color Grading',
+            description: 'Tutorial color grading untuk video cinematic',
+            image: 'https://img.youtube.com/vi/0K50fZFxFPI/maxresdefault.jpg',
+            link: 'https://youtu.be/0K50fZFxFPI'
+        },
+        {
+            category: 'video',
+            title: 'Tips Vlogging untuk Pemula',
+            description: 'Tips dan trik vlogging untuk pemula agar konten menarik',
+            image: 'https://img.youtube.com/vi/YahgzXkpmbQ/maxresdefault.jpg',
+            link: 'https://youtu.be/YahgzXkpmbQ'
+        },
+        {
+            category: 'video',
+            title: 'Review Action Camera',
+            description: 'Perbandingan action camera terbaik untuk olahraga dan petualangan',
+            image: 'https://img.youtube.com/vi/DjffdJMq1CE/maxresdefault.jpg',
+            link: 'https://youtu.be/DjffdJMq1CE'
+        },
+        {
+            category: 'video',
+            title: 'Tutorial Audio untuk Video',
+            description: 'Tips merekam audio berkualitas untuk video',
+            image: 'https://img.youtube.com/vi/17Jwk-vIArs/maxresdefault.jpg',
+            link: 'https://youtu.be/17Jwk-vIArs'
+        },
+        {
+            category: 'video',
+            title: 'Review Software Editing',
+            description: 'Perbandingan software editing video terbaik 2025',
+            image: 'https://img.youtube.com/vi/2TYPHdR2btE/maxresdefault.jpg',
+            link: 'https://youtu.be/2TYPHdR2btE'
+        },
+        {
+            category: 'video',
+            title: 'Tips Fotografi Produk',
+            description: 'Tips fotografi produk untuk e-commerce dengan budget terbatas',
+            image: 'https://img.youtube.com/vi/PY02Pq44VGE/maxresdefault.jpg',
+            link: 'https://youtu.be/PY02Pq44VGE'
         }
     ];
     
@@ -822,13 +921,14 @@ function initProjects() {
         
         projectsSliderWrapper.innerHTML = doubledProjects.map(project => `
             <div class="project-card" data-category="${project.category}">
-                <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
+                <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy" 
+                     onerror="this.src='https://picsum.photos/800/600?${Math.random()}'">
                 <div class="project-overlay">
                     <span class="project-category">${project.category}</span>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
-                    <a href="${project.link}" class="project-link">
-                        View Project <i class="fas fa-arrow-right"></i>
+                    <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link">
+                        Watch Video <i class="fas fa-play"></i>
                     </a>
                 </div>
             </div>
@@ -846,8 +946,10 @@ function initProjects() {
             wrapper.style.animationDuration = '30s';
         } else if (itemCount <= 5) {
             wrapper.style.animationDuration = '40s';
-        } else {
+        } else if (itemCount <= 10) {
             wrapper.style.animationDuration = '50s';
+        } else {
+            wrapper.style.animationDuration = '60s';
         }
     }
     
