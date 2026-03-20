@@ -790,43 +790,70 @@ function initProjects() {
             link: '#'
         },
         
-        // UI/UX Design Projects
+        // Design Projects
         {
             category: 'design',
-            title: 'Neon Brand Identity',
-            description: 'Complete brand identity with futuristic neon aesthetics',
+            title: 'BrainsIdea.Ltd',
+            description: 'Sebuah Brand Kaos Bergaya Street Wear Kekinian',
             image: 'https://picsum.photos/800/600?design1',
             link: '#'
         },
         {
-            category: 'design',
-            title: 'Mobile App UI',
-            description: 'Futuristic mobile app interface design',
+            category: 'desin',
+            title: 'Beanbagjkt',
+            description: 'Sebuah UMKM Lokal yang menjual sebuah kursi berbentuk abstrak untuk bersantai',
             image: 'https://picsum.photos/800/600?design2',
             link: '#'
         },
         {
             category: 'design',
-            title: '3D Product Mockups',
-            description: 'Photorealistic product presentations',
+            title: 'Bakso Nyonyiah',
+            description: 'Sebuah UMKM Lokal yang menjual bakso dengan resep tradisional yang nikmat',
             image: 'https://picsum.photos/800/600?design3',
             link: '#'
         },
         {
             category: 'design',
-            title: 'Dashboard UI Kit',
+            title: 'Lets Cling',
             description: 'Complete UI kit for modern dashboards',
             image: 'https://picsum.photos/800/600?design4',
             link: '#'
         },
         {
             category: 'design',
-            title: 'Landing Page Design',
+            title: 'Kebab Container Babarafi',
             description: 'High-converting landing page design',
             image: 'https://picsum.photos/800/600?design5',
             link: '#'
         },
-        
+        {
+            category: 'design',
+            title: 'The W Coffee & Kitchen'
+            description: 'High-converting landing page design',
+            image: 'https://picsum.photos/800/600?design5',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: 'Sambal Nusantara By Oetami',
+            description: 'High-converting landing page design',
+            image: 'https://picsum.photos/800/600?design5',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: 'Galaxy Camera',
+            description: 'High-converting landing page design',
+            image: 'https://picsum.photos/800/600?design5',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: 'SpotCetak.Tng',
+            description: 'High-converting landing page design',
+            image: 'https://picsum.photos/800/600?design5',
+            link: '#'
+        },
         // Video Production Projects
         {
             category: 'video',
