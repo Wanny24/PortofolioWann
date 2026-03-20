@@ -1521,165 +1521,82 @@ a:hover {
   font-size: clamp(16px, 3vw, 18px);
 }
 
-/* ===== SKILL ICONS WITH TOOLTIP - IMPROVED ===== */
+/* ===== SKILL ICONS WITH TOOLTIP ===== */
 .skills-container {
   margin-bottom: 30px;
 }
 
 .skill-category {
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .skill-category h4 {
   margin-bottom: 20px;
-  font-size: clamp(18px, 4vw, 22px);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.skill-category h4 i {
-  color: var(--accent-3);
-  font-size: clamp(20px, 4vw, 24px);
+  font-size: clamp(16px, 3vw, 18px);
+  color: var(--text-secondary);
 }
 
 .skill-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(12px, 3vw, 18px);
+  gap: clamp(10px, 2vw, 15px);
+}
+
+@media (max-width: 768px) {
+  .skill-icons {
+    justify-content: center;
+  }
 }
 
 .skill-icon-item {
   position: relative;
+  width: clamp(40px, 8vw, 50px);
+  height: clamp(40px, 8vw, 50px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  width: clamp(70px, 15vw, 85px);
-  padding: clamp(12px, 2.5vw, 15px) clamp(8px, 2vw, 10px);
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  transition: all 0.3s ease;
+  font-size: clamp(22px, 5vw, 28px);
+  color: var(--accent-3);
+  transition: var(--transition);
   cursor: pointer;
 }
 
-.skill-icon-item i {
-  font-size: clamp(28px, 6vw, 36px);
-  color: var(--accent-3);
-  transition: all 0.3s ease;
-}
-
-.skill-name {
-  font-size: clamp(10px, 2.5vw, 12px);
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
 .skill-icon-item:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px);
   background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text-primary);
   border-color: transparent;
-  box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+  box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
 }
 
-.skill-icon-item:hover i {
+.skill-icon-item::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  background: var(--bg-darker);
   color: var(--text-primary);
-  transform: scale(1.1);
+  font-size: clamp(10px, 2vw, 12px);
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
-.skill-icon-item:hover .skill-name {
-  color: var(--text-primary);
-}
-
-/* Tooltip untuk desktop */
 @media (min-width: 769px) {
-  .skill-icon-item {
-    position: relative;
-  }
-  
-  .skill-icon-item::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 12px;
-    background: var(--bg-darker);
-    color: var(--accent-3);
-    font-size: 11px;
-    font-weight: 500;
-    border-radius: 20px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid var(--primary);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    pointer-events: none;
-  }
-  
   .skill-icon-item:hover::before {
     opacity: 1;
     visibility: visible;
     bottom: -40px;
-  }
-}
-
-/* Responsive untuk tablet */
-@media (max-width: 768px) {
-  .skill-icons {
-    gap: 12px;
-    justify-content: center;
-  }
-  
-  .skill-icon-item {
-    width: calc(25% - 12px);
-    min-width: 75px;
-    padding: 12px 8px;
-  }
-  
-  .skill-icon-item i {
-    font-size: 28px;
-  }
-  
-  .skill-name {
-    font-size: 10px;
-  }
-}
-
-/* Responsive untuk mobile */
-@media (max-width: 576px) {
-  .skill-icons {
-    gap: 10px;
-  }
-  
-  .skill-icon-item {
-    width: calc(33.33% - 10px);
-    min-width: 85px;
-    padding: 10px 6px;
-  }
-  
-  .skill-icon-item i {
-    font-size: 26px;
-  }
-  
-  .skill-name {
-    font-size: 9px;
-  }
-}
-
-/* Responsive untuk mobile kecil */
-@media (max-width: 400px) {
-  .skill-icon-item {
-    width: calc(50% - 10px);
-    min-width: 100px;
   }
 }
 
