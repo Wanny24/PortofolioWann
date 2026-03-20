@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>All Projects | Irwan Yuandri Portfolio</title>
+  
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Additional styles for projects page */
+    .projects-page {
+      min-height: 100vh;
+      background: var(--bg-dark);
+      padding-top: 100px;
+    }
+    
+    .projects-page-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .projects-page-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-3);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+    
+    .projects-page-header .back-link:hover {
+      transform: translateX(-5px);
+      color: var(--primary);
+    }
+    
+    .projects-page-header .page-title {
+      font-size: clamp(32px, 8vw, 48px);
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+    
+    .projects-page-header .page-subtitle {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+    
+    .projects-count {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background: var(--glass-bg);
+      display: inline-block;
+      border-radius: 30px;
+      color: var(--accent-3);
+      font-size: 14px;
+    }
+    
+    .projects-grid-full {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .projects-grid-full {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .projects-grid-full {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Loading Animation untuk Projects Page */
+    .loading-projects {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    
+    .loading-projects .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--glass-border);
+      border-top-color: var(--accent-3);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-projects p {
+      color: var(--accent-3);
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: var(--transition);
+      box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+    }
+    
+    .back-to-top.show {
+      display: flex;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(164, 99, 245, 0.7);
+    }
+    
+    @media (max-width: 768px) {
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle Canvas Background -->
+  <canvas id="particleCanvas"></canvas>
+  
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">IY<span class="text-gradient">.</span></a>
+      <div class="nav-menu">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#projects" class="nav-link active">Projects</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Projects Page Content -->
+  <main class="projects-page">
+    <div class="container">
+      <div class="projects-page-header">
+        <a href="index.html#projects" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+        <h1 class="page-title">All Projects</h1>
+        <p class="page-subtitle">Explore all my creative works and projects</p>
+      </div>
+      
+      <div class="projects-filter" id="projectsFilter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Dev</button>
+        <button class="filter-btn" data-filter="design">UI/UX Design</button>
+        <button class="filter-btn" data-filter="video">Video Production</button>
+        <button class="filter-btn" data-filter="bot">Bot Automation</button>
+      </div>
+      
+      <div class="projects-count" id="projectsCount">
+        Loading projects...
+      </div>
+      
+      <div class="projects-grid-full" id="allProjectsGrid">
+        <!-- Loading Animation -->
+        <div class="loading-projects">
+          <div class="spinner"></div>
+          <p>LOADING PROJECTS...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Irwan Yuandri</h3>
+          <p>Creating future-proof digital experiences</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/Wanny24" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Irwan Yuandri. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles();
+      initNavbar();
+      initBackToTop();
+      initThemeToggle();
+      loadAllProjects();
+      initFilters();
+    });
+    
+    // ===== PARTICLES BACKGROUND =====
+    function initParticles() {
+      const canvas = document.getElementById('particleCanvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      
+      const geometry = new THREE.BufferGeometry();
+      const count = 2000;
+      const positions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+      
+      for (let i = 0; i < count * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 100;
+        positions[i + 1] = (Math.random() - 0.5) * 100;
+        positions[i + 2] = (Math.random() - 0.5) * 100;
+        
+        colors[i] = 0.4 + Math.random() * 0.4;
+        colors[i + 1] = 0.2 + Math.random() * 0.3;
+        colors[i + 2] = 0.8 + Math.random() * 0.2;
+      }
+      
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      
+      const material = new THREE.PointsMaterial({
+        size: 0.1,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+      });
+      
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+      
+      camera.position.z = 30;
+      
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+      
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.x += 0.0001;
+        particles.rotation.y += 0.0002;
+        particles.rotation.y += mouseX * 0.0005;
+        particles.rotation.x += mouseY * 0.0005;
+        renderer.render(scene, camera);
+      }
+      
+      animate();
+      
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+    
+    // ===== NAVBAR =====
+    function initNavbar() {
+      const navbar = document.querySelector('.navbar');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+    }
+    
+    // ===== BACK TO TOP =====
+    function initBackToTop() {
+      const backToTop = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      });
+      
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // ===== THEME TOGGLE =====
+    function initThemeToggle() {
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+          document.body.classList.toggle('light-theme');
+          
+          if (document.body.classList.contains('light-theme')) {
+            icon.className = 'fas fa-sun';
+          } else {
+            icon.className = 'fas fa-moon';
+          }
+        });
+      }
+    }
+    
+    // ===== GET CATEGORY NAME =====
+    function getCategoryName(category) {
+      const names = {
+        'web': 'Web Development',
+        'design': 'UI/UX Design',
+        'video': 'Video Production',
+        'bot': 'Bot Automation'
+      };
+      return names[category] || category;
+    }
+    
+    // ===== LOAD ALL PROJECTS =====
+    function loadAllProjects() {
+      const projectsData = localStorage.getItem('allProjects');
+      const projectsGrid = document.getElementById('allProjectsGrid');
+      const projectsCount = document.getElementById('projectsCount');
+      
+      if (!projectsGrid) return;
+      
+      // Simulasi loading untuk efek animasi
+      setTimeout(() => {
+        if (!projectsData) {
+          projectsGrid.innerHTML = `
+            <div class="no-projects">
+              <i class="fas fa-folder-open"></i>
+              <p>No projects found.</p>
+            </div>
+          `;
+          if (projectsCount) projectsCount.textContent = '0 Projects';
+          return;
+        }
+        
+        const projects = JSON.parse(projectsData);
+        
+        // Update count
+        if (projectsCount) {
+          projectsCount.textContent = `Total ${projects.length} Projects`;
+        }
+        
+        // Store projects for filtering
+        window.allProjects = projects;
+        
+        displayProjects(projects);
+      }, 800); // Loading animation delay
+    }
+    
+    function displayProjects(projects) {
+      const projectsGrid = document.getElementById('allProjectsGrid');
+      if (!projectsGrid) return;
+      
+      if (projects.length === 0) {
+        projectsGrid.innerHTML = `
+          <div class="no-projects">
+            <i class="fas fa-folder-open"></i>
+            <p>No projects found in this category.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      projectsGrid.innerHTML = projects.map(project => `
+        <div class="project-card" data-category="${project.category}" onclick="window.open('${project.link}', '_blank')">
+          <div class="project-image-container">
+            <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy" 
+                 onerror="this.src='https://picsum.photos/800/600?${Math.random()}'">
+            <div class="project-overlay-hover">
+              <div class="project-play-btn">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-category">${getCategoryName(project.category)}</span>
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+            <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
+              ${project.category === 'video' ? 'Watch Video' : 'View Project'} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // ===== FILTERS =====
+    function initFilters() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      if (filterBtns.length === 0) return;
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.dataset.filter;
+          const projects = window.allProjects || [];
+          
+          // Show loading animation saat filter
+          const projectsGrid = document.getElementById('allProjectsGrid');
+          if (projectsGrid) {
+            projectsGrid.innerHTML = `
+              <div class="loading-projects">
+                <div class="spinner"></div>
+                <p>FILTERING PROJECTS...</p>
+              </div>
+            `;
+          }
+          
+          setTimeout(() => {
+            if (filter === 'all') {
+              displayProjects(projects);
+            } else {
+              const filtered = projects.filter(p => p.category === filter);
+              displayProjects(filtered);
+            }
+          }, 400);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

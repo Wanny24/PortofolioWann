@@ -490,27 +490,36 @@
   </div>
 
   <!-- Projects Section - Grid Layout -->
-<section id="projects" class="projects">
-  <div class="container">
-    <div class="section-header" data-aos="fade-up">
-      <span class="section-subtitle">PORTFOLIO</span>
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="section-line"></div>
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-subtitle">PORTFOLIO</span>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="projects-filter" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Dev</button>
+        <button class="filter-btn" data-filter="design">UI/UX Design</button>
+        <button class="filter-btn" data-filter="video">Video Production</button>
+        <button class="filter-btn" data-filter="bot">Bot Automation</button>
+      </div>
+      
+      <!-- Projects Grid Container - Hanya 3 project per kategori -->
+      <div class="projects-grid" id="projectsGrid" data-aos="fade-up">
+        <!-- Projects will be loaded via JavaScript - hanya 3 per kategori -->
+      </div>
+      
+      <!-- Tombol Tampilkan Semua -->
+      <div class="show-all-container" data-aos="fade-up">
+        <button class="btn-show-all" id="showAllProjectsBtn">
+          <span>Tampilkan Semua</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
-    
-    <div class="projects-filter" data-aos="fade-up">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="web">Web Dev</button>
-      <button class="filter-btn" data-filter="design">UI/UX Design</button>
-      <button class="filter-btn" data-filter="video">Video Production</button>
-    </div>
-    
-    <!-- Projects Grid Container -->
-    <div class="projects-grid" id="projectsGrid" data-aos="fade-up">
-      <!-- Projects will be loaded via JavaScript -->
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact">

@@ -743,72 +743,105 @@ document.querySelectorAll('.exp-card').forEach(card => {
   });
 });
 
-// ===== PROJECTS - GRID LAYOUT WITH FILTER =====
+// ===== PROJECTS - GRID LAYOUT DENGAN 3 PROJECT PER KATEGORI =====
 function initProjects() {
     const projectsGrid = document.getElementById('projectsGrid');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const showAllBtn = document.getElementById('showAllProjectsBtn');
     
     if (!projectsGrid) return;
     
-    const projects = [
-        // Sample Projects (as placeholders - you can replace these)
+    // Data semua project
+    const allProjects = [
+        // Web Dev Projects
         {
             category: 'web',
             title: 'AI-Powered Dashboard',
             description: 'Real-time analytics dashboard with machine learning predictions',
-            image: 'https://picsum.photos/800/600?1',
-            link: '#'
-        },
-        {
-            category: 'design',
-            title: 'Neon Brand Identity',
-            description: 'Complete brand identity with futuristic neon aesthetics',
-            image: 'https://picsum.photos/800/600?2',
-            link: '#'
-        },
-        {
-            category: 'video',
-            title: 'Product Animation Reel',
-            description: '3D product animation with cinematic effects',
-            image: 'https://picsum.photos/800/600?3',
+            image: 'https://picsum.photos/800/600?web1',
             link: '#'
         },
         {
             category: 'web',
             title: 'E-commerce Platform',
             description: 'Modern e-commerce with AR product preview',
-            image: 'https://picsum.photos/800/600?4',
-            link: '#'
-        },
-        {
-            category: 'design',
-            title: 'Mobile App UI',
-            description: 'Futuristic mobile app interface design',
-            image: 'https://picsum.photos/800/600?5',
-            link: '#'
-        },
-        {
-            category: 'video',
-            title: 'Motion Graphics Pack',
-            description: 'Collection of futuristic motion graphics',
-            image: 'https://picsum.photos/800/600?6',
+            image: 'https://picsum.photos/800/600?web2',
             link: '#'
         },
         {
             category: 'web',
             title: 'Portfolio Website',
             description: 'Personal portfolio with futuristic design',
-            image: 'https://picsum.photos/800/600?7',
+            image: 'https://picsum.photos/800/600?web3',
+            link: '#'
+        },
+        {
+            category: 'web',
+            title: 'Task Management App',
+            description: 'Collaborative task management with real-time updates',
+            image: 'https://picsum.photos/800/600?web4',
+            link: '#'
+        },
+        {
+            category: 'web',
+            title: 'Social Media Analytics',
+            description: 'Track and analyze social media performance',
+            image: 'https://picsum.photos/800/600?web5',
+            link: '#'
+        },
+        
+        // UI/UX Design Projects
+        {
+            category: 'design',
+            title: 'Neon Brand Identity',
+            description: 'Complete brand identity with futuristic neon aesthetics',
+            image: 'https://picsum.photos/800/600?design1',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: 'Mobile App UI',
+            description: 'Futuristic mobile app interface design',
+            image: 'https://picsum.photos/800/600?design2',
             link: '#'
         },
         {
             category: 'design',
             title: '3D Product Mockups',
             description: 'Photorealistic product presentations',
-            image: 'https://picsum.photos/800/600?8',
+            image: 'https://picsum.photos/800/600?design3',
             link: '#'
         },
-        // YouTube Video Projects
+        {
+            category: 'design',
+            title: 'Dashboard UI Kit',
+            description: 'Complete UI kit for modern dashboards',
+            image: 'https://picsum.photos/800/600?design4',
+            link: '#'
+        },
+        {
+            category: 'design',
+            title: 'Landing Page Design',
+            description: 'High-converting landing page design',
+            image: 'https://picsum.photos/800/600?design5',
+            link: '#'
+        },
+        
+        // Video Production Projects
+        {
+            category: 'video',
+            title: 'Product Animation Reel',
+            description: '3D product animation with cinematic effects',
+            image: 'https://img.youtube.com/vi/4XvvYWIQuvs/maxresdefault.jpg',
+            link: 'https://youtu.be/4XvvYWIQuvs'
+        },
+        {
+            category: 'video',
+            title: 'Motion Graphics Pack',
+            description: 'Collection of futuristic motion graphics',
+            image: 'https://img.youtube.com/vi/N6sdkTQsQNA/maxresdefault.jpg',
+            link: 'https://youtu.be/N6sdkTQsQNA'
+        },
         {
             category: 'video',
             title: '5 Rekomendasi Drone DJI Pemula 2025',
@@ -819,7 +852,7 @@ function initProjects() {
         {
             category: 'video',
             title: 'Canon EOS R100 vs R50 Perbandingan',
-            description: '7 perbandingan utama antara Canon EOS R100 & Canon EOS R50, mana yang lebih worth it?',
+            description: '7 perbandingan utama antara Canon EOS R100 & Canon EOS R50',
             image: 'https://img.youtube.com/vi/N6sdkTQsQNA/maxresdefault.jpg',
             link: 'https://youtu.be/N6sdkTQsQNA'
         },
@@ -833,7 +866,7 @@ function initProjects() {
         {
             category: 'video',
             title: 'Tips Fotografi dengan Drone',
-            description: 'Tips dan trik fotografi menggunakan drone untuk pemula',
+            description: 'Tips dan trik fotografi menggunakan drone',
             image: 'https://img.youtube.com/vi/EMyPysLqvUs/maxresdefault.jpg',
             link: 'https://youtu.be/EMyPysLqvUs'
         },
@@ -847,90 +880,113 @@ function initProjects() {
         {
             category: 'video',
             title: 'Tutorial Editing Video',
-            description: 'Tutorial editing video untuk pemula menggunakan software gratis',
+            description: 'Tutorial editing video untuk pemula',
             image: 'https://img.youtube.com/vi/EG-jmQ36A6o/maxresdefault.jpg',
             link: 'https://youtu.be/EG-jmQ36A6o'
         },
+        
+        // Bot Automation Projects
         {
-            category: 'video',
-            title: 'Tips Cinematic dengan Smartphone',
-            description: 'Cara membuat video cinematic hanya dengan smartphone',
-            image: 'https://img.youtube.com/vi/iXfu7qWlduo/maxresdefault.jpg',
-            link: 'https://youtu.be/iXfu7qWlduo'
+            category: 'bot',
+            title: 'WhatsApp Bot Assistant',
+            description: 'Automated WhatsApp bot for customer service',
+            image: 'https://picsum.photos/800/600?bot1',
+            link: '#'
         },
         {
-            category: 'video',
-            title: 'Review Lensa Terbaik',
-            description: 'Rekomendasi lensa terbaik untuk berbagai kebutuhan fotografi',
-            image: 'https://img.youtube.com/vi/_t6mbPBlmvw/maxresdefault.jpg',
-            link: 'https://youtu.be/_t6mbPBlmvw'
+            category: 'bot',
+            title: 'Telegram Crypto Trader',
+            description: 'Telegram bot for cryptocurrency trading signals',
+            image: 'https://picsum.photos/800/600?bot2',
+            link: '#'
         },
         {
-            category: 'video',
-            title: 'Tips Lighting untuk Video',
-            description: 'Tips lighting sederhana untuk hasil video profesional',
-            image: 'https://img.youtube.com/vi/U40ANiDEoK4/maxresdefault.jpg',
-            link: 'https://youtu.be/U40ANiDEoK4'
+            category: 'bot',
+            title: 'Discord Moderation Bot',
+            description: 'Advanced moderation bot for Discord servers',
+            image: 'https://picsum.photos/800/600?bot3',
+            link: '#'
         },
         {
-            category: 'video',
-            title: 'Review Gimbal Stabilizer',
-            description: 'Review gimbal stabilizer terbaik untuk smartphone dan kamera',
-            image: 'https://img.youtube.com/vi/Sk9j9vtNYic/maxresdefault.jpg',
-            link: 'https://youtu.be/Sk9j9vtNYic'
+            category: 'bot',
+            title: 'Instagram Auto-Comment Bot',
+            description: 'Automated engagement bot for Instagram',
+            image: 'https://picsum.photos/800/600?bot4',
+            link: '#'
         },
         {
-            category: 'video',
-            title: 'Tutorial Color Grading',
-            description: 'Tutorial color grading untuk video cinematic',
-            image: 'https://img.youtube.com/vi/0K50fZFxFPI/maxresdefault.jpg',
-            link: 'https://youtu.be/0K50fZFxFPI'
+            category: 'bot',
+            title: 'Twitter Sentiment Analyzer',
+            description: 'Bot that analyzes Twitter sentiment in real-time',
+            image: 'https://picsum.photos/800/600?bot5',
+            link: '#'
         },
         {
-            category: 'video',
-            title: 'Tips Vlogging untuk Pemula',
-            description: 'Tips dan trik vlogging untuk pemula agar konten menarik',
-            image: 'https://img.youtube.com/vi/YahgzXkpmbQ/maxresdefault.jpg',
-            link: 'https://youtu.be/YahgzXkpmbQ'
-        },
-        {
-            category: 'video',
-            title: 'Review Action Camera',
-            description: 'Perbandingan action camera terbaik untuk olahraga dan petualangan',
-            image: 'https://img.youtube.com/vi/DjffdJMq1CE/maxresdefault.jpg',
-            link: 'https://youtu.be/DjffdJMq1CE'
-        },
-        {
-            category: 'video',
-            title: 'Tutorial Audio untuk Video',
-            description: 'Tips merekam audio berkualitas untuk video',
-            image: 'https://img.youtube.com/vi/17Jwk-vIArs/maxresdefault.jpg',
-            link: 'https://youtu.be/17Jwk-vIArs'
-        },
-        {
-            category: 'video',
-            title: 'Review Software Editing',
-            description: 'Perbandingan software editing video terbaik 2025',
-            image: 'https://img.youtube.com/vi/2TYPHdR2btE/maxresdefault.jpg',
-            link: 'https://youtu.be/2TYPHdR2btE'
-        },
-        {
-            category: 'video',
-            title: 'Tips Fotografi Produk',
-            description: 'Tips fotografi produk untuk e-commerce dengan budget terbatas',
-            image: 'https://img.youtube.com/vi/PY02Pq44VGE/maxresdefault.jpg',
-            link: 'https://youtu.be/PY02Pq44VGE'
+            category: 'bot',
+            title: 'Slack Notification Bot',
+            description: 'Automated Slack notifications for team updates',
+            image: 'https://picsum.photos/800/600?bot6',
+            link: '#'
         }
     ];
     
+    // Simpan semua project ke localStorage untuk halaman projects.html
+    localStorage.setItem('allProjects', JSON.stringify(allProjects));
+    
+    // Fungsi untuk mendapatkan 3 project terbaik per kategori
+    function getBestProjectsByCategory(category) {
+        const categoryProjects = allProjects.filter(p => p.category === category);
+        // Ambil 3 project pertama (atau kurang jika tidak cukup)
+        return categoryProjects.slice(0, 3);
+    }
+    
+    // Fungsi untuk mendapatkan 3 project terbaik secara keseluruhan (untuk filter 'all')
+function getBestAllProjects() {
+    // Ambil project dari berbagai kategori secara bergantian
+    const categories = ['web', 'design', 'video', 'bot'];
+    const result = [];
+    let index = 0;
+    
+    while (result.length < 3 && categories.length > 0) {
+        const category = categories[index % categories.length];
+        const categoryProjects = allProjects.filter(p => p.category === category);
+        
+        // Cari project dari kategori ini yang belum ada di result
+        const available = categoryProjects.find(p => !result.includes(p));
+        if (available) {
+            result.push(available);
+        }
+        index++;
+        
+        // Hentikan jika sudah loop terlalu banyak
+        if (index > 20) break;
+    }
+    
+    // Jika masih kurang dari 3, ambil project pertama yang tersisa
+    if (result.length < 3) {
+        const remaining = allProjects.filter(p => !result.includes(p));
+        while (result.length < 3 && remaining.length > 0) {
+            result.push(remaining[0]);
+            remaining.shift();
+        }
+    }
+    
+    return result;
+}
+    
     let currentFilter = 'all';
     
+    // Fungsi untuk menampilkan project sesuai filter
     function displayProjects() {
-        const filtered = currentFilter === 'all' 
-            ? projects 
-            : projects.filter(p => p.category === currentFilter);
+        let projectsToShow = [];
         
-        if (filtered.length === 0) {
+        if (currentFilter === 'all') {
+            projectsToShow = getBestAllProjects();
+        } else {
+            projectsToShow = getBestProjectsByCategory(currentFilter);
+        }
+        
+        if (projectsToShow.length === 0) {
             projectsGrid.innerHTML = `
                 <div class="no-projects">
                     <i class="fas fa-folder-open"></i>
@@ -940,7 +996,7 @@ function initProjects() {
             return;
         }
         
-        projectsGrid.innerHTML = filtered.map(project => `
+        projectsGrid.innerHTML = projectsToShow.map(project => `
             <div class="project-card" data-category="${project.category}" onclick="window.open('${project.link}', '_blank')">
                 <div class="project-image-container">
                     <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy" 
@@ -952,7 +1008,7 @@ function initProjects() {
                     </div>
                 </div>
                 <div class="project-info">
-                    <span class="project-category">${project.category === 'web' ? 'Web Development' : project.category === 'design' ? 'UI/UX Design' : 'Video Production'}</span>
+                    <span class="project-category">${getCategoryName(project.category)}</span>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
@@ -963,6 +1019,17 @@ function initProjects() {
         `).join('');
     }
     
+    function getCategoryName(category) {
+        const names = {
+            'web': 'Web Development',
+            'design': 'UI/UX Design',
+            'video': 'Video Production',
+            'bot': 'Bot Automation'
+        };
+        return names[category] || category;
+    }
+    
+    // Event listener untuk filter buttons
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -974,6 +1041,24 @@ function initProjects() {
         });
     }
     
+    // Tombol Tampilkan Semua dengan loading animation
+    if (showAllBtn) {
+        showAllBtn.addEventListener('click', () => {
+            // Tambah loading animation pada tombol
+            const originalText = showAllBtn.innerHTML;
+            showAllBtn.innerHTML = '<span>Loading...</span> <i class="fas fa-spinner fa-spin"></i>';
+            showAllBtn.disabled = true;
+            
+            // Simulasi loading (untuk efek visual)
+            setTimeout(() => {
+                window.open('projects.html', '_blank');
+                showAllBtn.innerHTML = originalText;
+                showAllBtn.disabled = false;
+            }, 500);
+        });
+    }
+    
+    // Tampilkan project awal
     displayProjects();
 }
 

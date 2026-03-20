@@ -2369,6 +2369,68 @@ a:hover {
   opacity: 0.5;
 }
 
+/* ===== SHOW ALL BUTTON ===== */
+.show-all-container {
+  text-align: center;
+  margin-top: clamp(40px, 8vh, 60px);
+}
+
+.btn-show-all {
+  padding: clamp(12px, 2.5vw, 15px) clamp(30px, 6vw, 40px);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: 50px;
+  color: var(--text-primary);
+  font-size: clamp(14px, 3vw, 16px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+}
+
+.btn-show-all::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-show-all:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-show-all:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgba(164, 99, 245, 0.5);
+}
+
+.btn-show-all i {
+  transition: transform 0.3s ease;
+}
+
+.btn-show-all:hover i {
+  transform: translateX(5px);
+}
+
+@media (max-width: 576px) {
+  .btn-show-all {
+    width: 80%;
+    justify-content: center;
+  }
+}
+
 /* ===== CONTACT SECTION ===== */
 .contact {
   padding: clamp(60px, 10vh, 120px) 0;
