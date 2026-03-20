@@ -886,10 +886,10 @@ function initProjects() {
         },
         {
             category: 'video',
-            title: 'Tutorial Editing Video',
-            description: 'Tutorial editing video untuk pemula',
-            image: 'https://img.youtube.com/vi/EG-jmQ36A6o/maxresdefault.jpg',
-            link: 'https://youtu.be/EG-jmQ36A6o'
+            title: 'INI KAMERA FUJIFILM YANG LAGI BANYAK DICARI?! | Review Lengkap Fujifilm X-E5 Indonesia',
+            description: 'Review Lengkap Fujifilm X-E5 Indonesia',
+            image: 'https://img.youtube.com/vi/_t6mbPBlmvw/maxresdefault.jpg',
+            link: 'https://youtu.be/_t6mbPBlmvw'
         },
 
         // Bot Automation Projects
