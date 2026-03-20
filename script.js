@@ -847,13 +847,6 @@ function initProjects() {
             image: 'https://picsum.photos/800/600?design5',
             link: '#'
         },
-        {
-            category: 'design',
-            title: 'SpotCetak.Tng',
-            description: 'High-converting landing page design',
-            image: 'https://picsum.photos/800/600?design5',
-            link: '#'
-        },
         // Video Production Projects
         {
             category: 'video',
