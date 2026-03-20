@@ -743,15 +743,15 @@ document.querySelectorAll('.exp-card').forEach(card => {
   });
 });
 
-// ===== PROJECTS - AUTO SLIDE =====
+// ===== PROJECTS - GRID LAYOUT WITH FILTER =====
 function initProjects() {
-    const projectsSliderWrapper = document.getElementById('projectsSliderWrapper');
+    const projectsGrid = document.getElementById('projectsGrid');
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const sliderContainer = document.getElementById('projectsSliderContainer');
     
-    if (!projectsSliderWrapper) return;
+    if (!projectsGrid) return;
     
     const projects = [
+        // Sample Projects (as placeholders - you can replace these)
         {
             category: 'web',
             title: 'AI-Powered Dashboard',
@@ -764,6 +764,13 @@ function initProjects() {
             title: 'Neon Brand Identity',
             description: 'Complete brand identity with futuristic neon aesthetics',
             image: 'https://picsum.photos/800/600?2',
+            link: '#'
+        },
+        {
+            category: 'video',
+            title: 'Product Animation Reel',
+            description: '3D product animation with cinematic effects',
+            image: 'https://picsum.photos/800/600?3',
             link: '#'
         },
         {
@@ -781,6 +788,13 @@ function initProjects() {
             link: '#'
         },
         {
+            category: 'video',
+            title: 'Motion Graphics Pack',
+            description: 'Collection of futuristic motion graphics',
+            image: 'https://picsum.photos/800/600?6',
+            link: '#'
+        },
+        {
             category: 'web',
             title: 'Portfolio Website',
             description: 'Personal portfolio with futuristic design',
@@ -794,7 +808,7 @@ function initProjects() {
             image: 'https://picsum.photos/800/600?8',
             link: '#'
         },
-        // Added YouTube video projects
+        // YouTube Video Projects
         {
             category: 'video',
             title: '5 Rekomendasi Drone DJI Pemula 2025',
@@ -916,41 +930,37 @@ function initProjects() {
             ? projects 
             : projects.filter(p => p.category === currentFilter);
         
-        // Double the projects for seamless loop
-        const doubledProjects = [...filtered, ...filtered];
+        if (filtered.length === 0) {
+            projectsGrid.innerHTML = `
+                <div class="no-projects">
+                    <i class="fas fa-folder-open"></i>
+                    <p>No projects found in this category.</p>
+                </div>
+            `;
+            return;
+        }
         
-        projectsSliderWrapper.innerHTML = doubledProjects.map(project => `
-            <div class="project-card" data-category="${project.category}">
-                <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy" 
-                     onerror="this.src='https://picsum.photos/800/600?${Math.random()}'">
-                <div class="project-overlay">
-                    <span class="project-category">${project.category}</span>
+        projectsGrid.innerHTML = filtered.map(project => `
+            <div class="project-card" data-category="${project.category}" onclick="window.open('${project.link}', '_blank')">
+                <div class="project-image-container">
+                    <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy" 
+                         onerror="this.src='https://picsum.photos/800/600?${Math.random()}'">
+                    <div class="project-overlay-hover">
+                        <div class="project-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">${project.category === 'web' ? 'Web Development' : project.category === 'design' ? 'UI/UX Design' : 'Video Production'}</span>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
-                    <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link">
-                        Watch Video <i class="fas fa-play"></i>
+                    <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
+                        ${project.category === 'video' ? 'Watch Video' : 'View Project'} <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         `).join('');
-        
-        // Reset animation after filter change
-        const wrapper = projectsSliderWrapper;
-        wrapper.style.animation = 'none';
-        wrapper.offsetHeight; // Trigger reflow
-        wrapper.style.animation = 'slideAnimation 40s linear infinite';
-        
-        // Adjust animation duration based on number of items
-        const itemCount = filtered.length;
-        if (itemCount <= 3) {
-            wrapper.style.animationDuration = '30s';
-        } else if (itemCount <= 5) {
-            wrapper.style.animationDuration = '40s';
-        } else if (itemCount <= 10) {
-            wrapper.style.animationDuration = '50s';
-        } else {
-            wrapper.style.animationDuration = '60s';
-        }
     }
     
     if (filterBtns.length > 0) {
@@ -961,59 +971,6 @@ function initProjects() {
                 currentFilter = btn.dataset.filter;
                 displayProjects();
             });
-        });
-    }
-    
-    // DRAG TO SLIDE functionality (for manual control)
-    let isDragging = false;
-    let startX;
-    let scrollLeft;
-    
-    if (sliderContainer) {
-        sliderContainer.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            sliderContainer.classList.add('dragging');
-            startX = e.pageX - sliderContainer.offsetLeft;
-            scrollLeft = sliderContainer.scrollLeft;
-        });
-        
-        sliderContainer.addEventListener('mouseleave', () => {
-            isDragging = false;
-            sliderContainer.classList.remove('dragging');
-        });
-        
-        sliderContainer.addEventListener('mouseup', () => {
-            isDragging = false;
-            sliderContainer.classList.remove('dragging');
-        });
-        
-        sliderContainer.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - sliderContainer.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll speed
-            sliderContainer.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Touch events for mobile
-        sliderContainer.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            sliderContainer.classList.add('dragging');
-            startX = e.touches[0].pageX - sliderContainer.offsetLeft;
-            scrollLeft = sliderContainer.scrollLeft;
-        });
-        
-        sliderContainer.addEventListener('touchend', () => {
-            isDragging = false;
-            sliderContainer.classList.remove('dragging');
-        });
-        
-        sliderContainer.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - sliderContainer.offsetLeft;
-            const walk = (x - startX) * 2;
-            sliderContainer.scrollLeft = scrollLeft - walk;
         });
     }
     
@@ -1144,6 +1101,16 @@ function optimizeForTouch() {
         // Simplify animations
         document.querySelectorAll('.tech-icon').forEach(icon => {
             icon.style.animationDuration = '15s';
+        });
+        
+        // Add touch feedback for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
         });
     }
 }
