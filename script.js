@@ -830,17 +830,17 @@ function initProjects() {
         // Video Production Projects
         {
             category: 'video',
-            title: 'Product Animation Reel',
-            description: '3D product animation with cinematic effects',
-            image: 'https://img.youtube.com/vi/4XvvYWIQuvs/maxresdefault.jpg',
-            link: 'https://youtu.be/4XvvYWIQuvs'
+            title: '6 Rekomendasi Kamera Mirrorless Pemula Terbaik 2024',
+            description: 'Review dan rekomendasi Mirrorless terbaik untuk pemula di tahun 2024',
+            image: 'https://img.youtube.com/vi/PY02Pq44VGE/maxresdefault.jpg',
+            link: 'https://youtu.be/PY02Pq44VGE'
         },
         {
             category: 'video',
-            title: 'Motion Graphics Pack',
-            description: 'Collection of futuristic motion graphics',
-            image: 'https://img.youtube.com/vi/N6sdkTQsQNA/maxresdefault.jpg',
-            link: 'https://youtu.be/N6sdkTQsQNA'
+            title: 'INI KAMERA 360 PALING MURAH?! | Review Lengkap Akaso 360 Indonesia',
+            description: 'Review Paling Lengkap Akaso 360 Indonesia',
+            image: 'https://img.youtube.com/vi/U40ANiDEoK4/maxresdefault.jpg',
+            link: 'https://youtu.be/U40ANiDEoK4'
         },
         {
             category: 'video',
@@ -858,24 +858,31 @@ function initProjects() {
         },
         {
             category: 'video',
-            title: 'Rekomendasi Drone DJI Pemula',
-            description: 'Video review drone DJI untuk pemula',
+            title: 'UPGRADE NYA BANYAK BANGET NIH KAMERA?! | Review Fujifilm X T30 III Indonesia',
+            description: 'Review Paling Lengkap Fujifilm X T30 III Indonesia',
             image: 'https://img.youtube.com/vi/cv6qCxO2k4w/maxresdefault.jpg',
             link: 'https://youtu.be/cv6qCxO2k4w'
         },
         {
             category: 'video',
-            title: 'Tips Fotografi dengan Drone',
-            description: 'Tips dan trik fotografi menggunakan drone',
+            title: 'KAMERA TERBAIK STREET FOTOGRAFI SAAT INI?! | Review Ricoh GR IV HDF Indonesia',
+            description: 'Review Lengkap Ricoh GR IV HDF Indonesia',
             image: 'https://img.youtube.com/vi/EMyPysLqvUs/maxresdefault.jpg',
             link: 'https://youtu.be/EMyPysLqvUs'
         },
         {
             category: 'video',
-            title: 'Review Kamera Mirrorless',
-            description: 'Review lengkap kamera mirrorless untuk content creator',
+            title: '8 Rekomendasi Kamera Mirrorless Terbaik 2026',
+            description: 'Review dan rekomendasi Mirrorless terbaik untuk pemula di tahun 2026',
             image: 'https://img.youtube.com/vi/cXuw_dljE-I/maxresdefault.jpg',
             link: 'https://youtu.be/cXuw_dljE-I'
+        },
+        {
+            category: 'video',
+            title: 'KAMERA INSTAX TERBARU INI BISA REKAM VIDEO?! | Review Instax Mini Evo Cinema Indonesia',
+            description: 'Review Instax Mini Evo Cinema Indonesia',
+            image: 'https://img.youtube.com/vi/EG-jmQ36A6o/maxresdefault.jpg',
+            link: 'https://youtu.be/EG-jmQ36A6o'
         },
         {
             category: 'video',
@@ -884,7 +891,7 @@ function initProjects() {
             image: 'https://img.youtube.com/vi/EG-jmQ36A6o/maxresdefault.jpg',
             link: 'https://youtu.be/EG-jmQ36A6o'
         },
-        
+
         // Bot Automation Projects
         {
             category: 'bot',
